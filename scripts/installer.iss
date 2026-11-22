@@ -1,4 +1,4 @@
-#define AppVersion "0.1.16"
+#define AppVersion "0.1.17"
 #define Bundle "QuickPeek-" + AppVersion + "-windows-x64"
 
 [Setup]
@@ -19,11 +19,30 @@ Compression=lzma2
 SolidCompression=yes
 DisableProgramGroupPage=yes
 
+Uninstallable=not PortableUpdate
+CreateUninstallRegKey=not PortableUpdate
+
 [Files]
 Source: "..\dist\{#Bundle}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{userprograms}\QuickPeek"; Filename: "{app}\quickpeek.exe"
+Check: not PortableUpdate; Name: "{userprograms}\QuickPeek"; Filename: "{app}\quickpeek.exe"
 
 [Run]
 Filename: "{app}\quickpeek.exe"; Description: "Launch QuickPeek"; Flags: nowait postinstall skipifsilent
+
+[Code]
+function PortableUpdate: Boolean;
+begin
+  Result := ExpandConstant('{param:MODE|}') = 'portable';
+end;
+
+procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  Value: String;
+begin
+  if (CurUninstallStep = usPostUninstall) and
+    RegQueryStringValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'QuickPeek', Value) and
+    (CompareText(Value, '"' + ExpandConstant('{app}\quickpeek.exe') + '"') = 0) then
+    RegDeleteValue(HKCU, 'Software\Microsoft\Windows\CurrentVersion\Run', 'QuickPeek');
+end;

@@ -19,6 +19,7 @@ use windows::{
 pub mod caption;
 pub mod media;
 pub mod pdf;
+mod updates;
 pub mod wheel;
 
 static PDF_ACTIVE: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
@@ -681,6 +682,17 @@ unsafe extern "system" fn broker_proc(hwnd: HWND, msg: u32, w: WPARAM, l: LPARAM
             TRAY if l.0 as u32 == WM_RBUTTONUP => {
                 if let Ok(menu) = CreatePopupMenu() {
                     let _ = AppendMenuW(menu, MF_STRING, 1, w!("打开预览…"));
+                    let checked = |on| {
+                        if on {
+                            MF_STRING | MF_CHECKED
+                        } else {
+                            MF_STRING
+                        }
+                    };
+                    let _ = AppendMenuW(menu, MF_STRING, 3, w!("检查更新…"));
+                    let _ = AppendMenuW(menu, checked(updates::automatic()), 4, w!("自动更新"));
+                    let _ = AppendMenuW(menu, checked(updates::startup()), 5, w!("开机自启"));
+                    let _ = AppendMenuW(menu, MF_SEPARATOR, 0, None);
                     let _ = AppendMenuW(menu, MF_STRING, 2, w!("退出 QuickPeek"));
                     let mut point = POINT::default();
                     let _ = GetCursorPos(&mut point);
@@ -689,13 +701,32 @@ unsafe extern "system" fn broker_proc(hwnd: HWND, msg: u32, w: WPARAM, l: LPARAM
                         TrackPopupMenu(menu, TPM_RETURNCMD, point.x, point.y, Some(0), hwnd, None)
                             .0;
                     let _ = DestroyMenu(menu);
-                    if choice == 2 {
+                    if choice == 3 {
+                        updates::check(true);
+                    } else if choice == 4 {
+                        if let Err(e) = updates::toggle_auto() {
+                            show_error(&e);
+                        } else if updates::automatic() {
+                            updates::check(false);
+                        }
+                    } else if choice == 5 {
+                        if let Err(e) = updates::toggle_startup() {
+                            show_error(&e);
+                        }
+                    } else if choice == 2 {
                         let _ = DestroyWindow(hwnd);
                     } else if choice == 1
                         && let Ok(exe) = std::env::current_exe()
                     {
                         let _ = Command::new(exe).arg("--preview").spawn();
                     }
+                }
+                LRESULT(0)
+            }
+            WM_TIMER if w.0 == 17 => {
+                SetTimer(Some(hwnd), 17, 24 * 60 * 60 * 1000, None);
+                if updates::automatic() {
+                    updates::check(false);
                 }
                 LRESULT(0)
             }
@@ -845,6 +876,7 @@ pub fn run_broker() -> Result<(), String> {
         )
         .map_err(|e| e.to_string())?;
         BROKER.store(hwnd.0 as isize, Ordering::Relaxed);
+        SetTimer(Some(hwnd), 17, 60_000, None);
         let mut data = NOTIFYICONDATAW {
             cbSize: std::mem::size_of::<NOTIFYICONDATAW>() as u32,
             hWnd: hwnd,

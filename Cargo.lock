@@ -3544,7 +3544,7 @@ dependencies = [
 
 [[package]]
 name = "quickpeek"
-version = "0.1.16"
+version = "0.1.17"
 dependencies = [
  "base64 0.23.1",
  "calamine",
@@ -3566,6 +3566,7 @@ dependencies = [
  "windows 0.62.2",
  "windows-reactor",
  "windows-reactor-setup",
+ "windows-registry 0.5.3",
  "windows-webview",
  "winresource",
  "zip",
