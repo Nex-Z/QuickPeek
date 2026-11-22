@@ -7,6 +7,14 @@ use windows::Win32::{
         WindowsAndMessaging::*,
     },
 };
+pub const LIGHT_BACKGROUND: u32 = 0xf2f2f8;
+pub const HEIGHT: f32 = 32.;
+pub const BUTTON_WIDTH: f32 = 46.;
+pub const ICON_SIZE: f32 = 20.;
+pub const ICON_LEFT: f32 = 16.;
+pub const TEXT_LEFT: f32 = 46.;
+pub const TEXT_SIZE: f32 = 12.;
+
 const ID: usize = 0x5150;
 thread_local! { static CHANGED: RefCell<Option<Box<dyn Fn()>>> = const { RefCell::new(None) }; }
 
@@ -20,7 +28,7 @@ pub fn right_compensation() -> f64 {
             .map(|h| GetDpiForWindow(h))
             .unwrap_or_else(|| GetDpiForSystem())
     };
-    48.0 + 138.0 * (dpi as f64 / 96.0 - 1.0)
+    48.0 + f64::from(3. * BUTTON_WIDTH) * (dpi as f64 / 96.0 - 1.0)
 }
 pub fn install(changed: impl Fn() + 'static) -> Result<(), String> {
     let hwnd = super::current_window().ok_or("预览窗口未就绪")?;

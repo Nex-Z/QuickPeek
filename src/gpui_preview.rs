@@ -21,7 +21,7 @@ pub fn supports(path: &Path) -> bool {
         })
 }
 
-const TITLE_HEIGHT: f32 = 32.;
+use super::platform::caption::{self, HEIGHT as TITLE_HEIGHT};
 
 struct Picture {
     width: f32,
@@ -204,13 +204,17 @@ impl Render for Reader {
                     .flex()
                     .items_center()
                     .h(px(TITLE_HEIGHT))
+                    .bg(rgb(caption::LIGHT_BACKGROUND))
                     .flex_shrink_0()
                     .child(
                         div()
                             .flex_1()
                             .min_w_0()
                             .h_full()
-                            .px_3()
+                            .pl(px(caption::ICON_LEFT))
+                            .gap(px(caption::TEXT_LEFT
+                                - caption::ICON_LEFT
+                                - caption::ICON_SIZE))
                             .flex()
                             .items_center()
                             .overflow_hidden()
@@ -221,32 +225,51 @@ impl Render for Reader {
                                     super::platform::drag_caption()
                                 }
                             })
+                            .child({
+                                static ICON: std::sync::LazyLock<std::sync::Arc<gpui::Image>> =
+                                    std::sync::LazyLock::new(|| {
+                                        std::sync::Arc::new(gpui::Image::from_bytes(
+                                            gpui::ImageFormat::Png,
+                                            include_bytes!("../assets/caption-icon.png").to_vec(),
+                                        ))
+                                    });
+                                img(ICON.clone())
+                                    .size(px(caption::ICON_SIZE))
+                                    .flex_shrink_0()
+                            })
                             .child(
-                                div().truncate().text_size(px(13.)).child(
-                                    self.path
-                                        .file_name()
-                                        .unwrap_or_default()
-                                        .to_string_lossy()
-                                        .into_owned(),
-                                ),
+                                div()
+                                    .truncate()
+                                    .font_family("Segoe UI")
+                                    .text_size(px(caption::TEXT_SIZE))
+                                    .child(
+                                        self.path
+                                            .file_name()
+                                            .unwrap_or_default()
+                                            .to_string_lossy()
+                                            .into_owned(),
+                                    ),
                             ),
                     )
                     .child(
                         div()
                             .id("pin")
                             .flex_shrink_0()
-                            .w(px(32.))
-                            .h(px(28.))
+                            .w(px(caption::BUTTON_WIDTH))
+                            .h_full()
                             .flex()
                             .items_center()
                             .justify_center()
-                            .rounded_md()
                             .cursor_pointer()
-                            .font_family("Segoe MDL2 Assets")
-                            .text_size(px(15.))
-                            .bg(rgb(if self.pinned { 0xdceaff } else { 0xf5f6f8 }))
+                            .font_family("Segoe Fluent Icons")
+                            .text_size(px(14.))
+                            .bg(rgb(if self.pinned {
+                                0xbad5ff
+                            } else {
+                                caption::LIGHT_BACKGROUND
+                            }))
                             .text_color(rgb(if self.pinned { 0x145dab } else { 0x445365 }))
-                            .child(if self.pinned { "\u{e77a}" } else { "\u{e718}" })
+                            .child("\u{e840}")
                             .on_click(cx.listener(|this, _, _, cx| {
                                 this.pinned = !this.pinned;
                                 super::platform::pin_preview(this.pinned);
@@ -269,7 +292,7 @@ impl Render for Reader {
                         .into_iter()
                         .map(|(area, icon)| {
                             div()
-                                .w(px(46.))
+                                .w(px(caption::BUTTON_WIDTH))
                                 .h_full()
                                 .flex_shrink_0()
                                 .flex()

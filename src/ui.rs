@@ -1,3 +1,4 @@
+use crate::platform::caption;
 use crate::{
     core::{self, Document, Kind},
     platform::{self, media::Player},
@@ -504,8 +505,8 @@ impl Component for Preview {
             .unwrap_or_default();
         let pin = Button::new()
             .style(ButtonStyle::Subtle)
-            .width(46.0)
-            .height(32.0)
+            .width(caption::BUTTON_WIDTH as f64)
+            .height(caption::HEIGHT as f64)
             .element_ref(&self.initial_focus)
             .automation_name(if self.pinned {
                 "取消置顶"
@@ -526,7 +527,7 @@ impl Component for Preview {
                 Color::argb(0, 0, 0, 0)
             })
             .content(pin);
-        let titlebar = Grid::new().height(32.0).children((
+        let titlebar = Grid::new().height(caption::HEIGHT as f64).children((
             // RightHeader selects WinUI's 48-DIP template; shift its center onto
             // the 32-DIP native caption while compensating for its reserved inset.
             TitleBar::new()
@@ -543,18 +544,18 @@ impl Component for Preview {
                 .source_data(EncodedImage::new(Arc::<[u8]>::from(
                     include_bytes!("../assets/QuickPeek.ico").as_slice(),
                 )))
-                .width(20.0)
-                .height(20.0)
-                .margin(Thickness::xy(16.0, 0.0))
+                .width(caption::ICON_SIZE as f64)
+                .height(caption::ICON_SIZE as f64)
+                .margin(Thickness::xy(caption::ICON_LEFT as f64, 0.0))
                 .horizontal_alignment(HorizontalAlignment::Left)
                 .vertical_alignment(VerticalAlignment::Center)
                 .automation_name("QuickPeek"),
             TextBlock::new()
                 .text(filename)
                 .foreground(ink)
-                .font_size(12.0)
+                .font_size(caption::TEXT_SIZE as f64)
                 .text_trimming(TextTrimming::CharacterEllipsis)
-                .margin(Thickness::new(46.0, 0.0, 200.0, 0.0))
+                .margin(Thickness::new(caption::TEXT_LEFT as f64, 0.0, 200.0, 0.0))
                 .vertical_alignment(VerticalAlignment::Center),
         ));
         let content = self.content(c, ink, muted);
