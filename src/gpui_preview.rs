@@ -161,7 +161,6 @@ impl Render for Reader {
             .flex_col()
             .bg(rgb(0xffffff))
             .text_color(rgb(0x19232c))
-            .track_focus(&self.focus)
             .on_mouse_move(cx.listener(|this, e: &gpui::MouseMoveEvent, _, cx| {
                 if e.pressed_button != Some(gpui::MouseButton::Left) {
                     this.thumb_grab = None;
@@ -174,30 +173,6 @@ impl Render for Reader {
             .on_mouse_up(
                 gpui::MouseButton::Left,
                 cx.listener(|this, _, _, _| this.thumb_grab = None),
-            )
-            .on_key_down(cx.listener(|this, e: &KeyDownEvent, window, cx| {
-                match e.keystroke.key.as_str() {
-                    "escape" | "space" if !e.is_held => window.remove_window(),
-                    "pagedown" | "pageup" if this.image.is_none() => {
-                        let height = this.rows.viewport_bounds().size.height;
-                        this.rows.scroll_by(if e.keystroke.key == "pagedown" {
-                            height
-                        } else {
-                            -height
-                        });
-                        cx.notify();
-                    }
-                    "enter" => this.classic(cx),
-                    _ => {}
-                }
-            }))
-            .on_mouse_down(
-                gpui::MouseButton::Right,
-                cx.listener(|this, _, _, cx| {
-                    if super::platform::classic_menu() {
-                        this.classic(cx);
-                    }
-                }),
             )
             .child(
                 div()
@@ -218,13 +193,7 @@ impl Render for Reader {
                             .flex()
                             .items_center()
                             .overflow_hidden()
-                            .on_mouse_down(gpui::MouseButton::Left, |e, window, _| {
-                                if e.click_count == 2 {
-                                    window.zoom_window()
-                                } else {
-                                    super::platform::drag_caption()
-                                }
-                            })
+                            .window_control_area(gpui::WindowControlArea::Drag)
                             .child({
                                 static ICON: std::sync::LazyLock<std::sync::Arc<gpui::Image>> =
                                     std::sync::LazyLock::new(|| {
@@ -268,6 +237,10 @@ impl Render for Reader {
                             } else {
                                 caption::LIGHT_BACKGROUND
                             }))
+                            .hover({
+                                let pinned = self.pinned;
+                                move |v| v.bg(rgb(if pinned { 0xa8c8ff } else { 0xeaecef }))
+                            })
                             .text_color(rgb(if self.pinned { 0x145dab } else { 0x445365 }))
                             .child("\u{e840}")
                             .on_click(cx.listener(|this, _, _, cx| {
@@ -291,24 +264,26 @@ impl Render for Reader {
                         ]
                         .into_iter()
                         .map(|(area, icon)| {
+                            let is_close = matches!(area, gpui::WindowControlArea::Close);
                             div()
+                                .id(icon)
                                 .w(px(caption::BUTTON_WIDTH))
                                 .h_full()
                                 .flex_shrink_0()
                                 .flex()
                                 .items_center()
                                 .justify_center()
-                                .hover(|v| v.bg(rgb(0xeaecef)))
+                                .window_control_area(area)
+                                .hover(move |v| {
+                                    if is_close {
+                                        v.bg(rgb(0xe81123)).text_color(rgb(0xffffff))
+                                    } else {
+                                        v.bg(rgb(0xeaecef))
+                                    }
+                                })
                                 .font_family("Segoe MDL2 Assets")
                                 .text_size(px(10.))
                                 .child(icon)
-                                .id(icon)
-                                .on_click(move |_, window, _| match area {
-                                    gpui::WindowControlArea::Min => window.minimize_window(),
-                                    gpui::WindowControlArea::Max => window.zoom_window(),
-                                    gpui::WindowControlArea::Close => window.remove_window(),
-                                    gpui::WindowControlArea::Drag => unreachable!(),
-                                })
                         }),
                     ),
             )
@@ -316,7 +291,37 @@ impl Render for Reader {
                 view.child(div().px_4().py_2().child(self.notice.clone()))
             })
             .relative()
-            .child(div().flex_1().min_h_0().child(body))
+            .child(
+                div()
+                    .flex_1()
+                    .min_h_0()
+                    .track_focus(&self.focus)
+                    .on_key_down(cx.listener(|this, e: &KeyDownEvent, window, cx| {
+                        match e.keystroke.key.as_str() {
+                            "escape" | "space" if !e.is_held => window.remove_window(),
+                            "pagedown" | "pageup" if this.image.is_none() => {
+                                let height = this.rows.viewport_bounds().size.height;
+                                this.rows.scroll_by(if e.keystroke.key == "pagedown" {
+                                    height
+                                } else {
+                                    -height
+                                });
+                                cx.notify();
+                            }
+                            "enter" => this.classic(cx),
+                            _ => {}
+                        }
+                    }))
+                    .on_mouse_down(
+                        gpui::MouseButton::Right,
+                        cx.listener(|this, _, _, cx| {
+                            if super::platform::classic_menu() {
+                                this.classic(cx);
+                            }
+                        }),
+                    )
+                    .child(body),
+            )
     }
 }
 

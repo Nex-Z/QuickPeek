@@ -200,24 +200,123 @@ fn fit_preview(area: RECT, width: i32, height: i32) -> (i32, i32, i32, i32) {
         h,
     )
 }
-
-#[cfg(feature = "gpui-preview")]
-pub fn drag_caption() {
-    unsafe {
-        if let Some(hwnd) = current_window() {
-            let mut at = POINT::default();
-            if GetCursorPos(&mut at).is_ok() {
-                let position = (at.x as u16 as u32) | ((at.y as u16 as u32) << 16);
-                let _ = windows::Win32::UI::Input::KeyboardAndMouse::ReleaseCapture();
-                let _ = PostMessageW(
-                    Some(hwnd),
-                    WM_NCLBUTTONDOWN,
-                    WPARAM(HTCAPTION as usize),
-                    LPARAM(position as isize),
-                );
-            }
+fn cascade_preview(
+    area: RECT,
+    width: i32,
+    height: i32,
+    step: i32,
+    existing: &[RECT],
+) -> (i32, i32, i32, i32) {
+    let (base_x, base_y, w, h) = fit_preview(area, width, height);
+    let step = step.max(1);
+    let collides = |x: i32, y: i32| {
+        existing
+            .iter()
+            .any(|r| (r.left - x).abs() < step / 2 && (r.top - y).abs() < step / 2)
+    };
+    if !collides(base_x, base_y) {
+        return (base_x, base_y, w, h);
+    }
+    let max_x = (area.right - w).max(area.left);
+    let max_y = (area.bottom - h).max(area.top);
+    let mut x = base_x;
+    let mut y = base_y;
+    for i in 1..=16 {
+        x += step;
+        y += step;
+        if x > max_x || y > max_y {
+            let wrap = (i % 4) * step;
+            x = (area.left + wrap).min(max_x);
+            y = (area.top + wrap).min(max_y);
+        }
+        if !collides(x, y) {
+            return (x, y, w, h);
         }
     }
+    (x.clamp(area.left, max_x), y.clamp(area.top, max_y), w, h)
+}
+unsafe fn is_preview_window(hwnd: HWND) -> bool {
+    unsafe {
+        if !IsWindowVisible(hwnd).as_bool()
+            || !GetWindow(hwnd, GW_OWNER).unwrap_or_default().0.is_null()
+        {
+            return false;
+        }
+        let ex = GetWindowLongW(hwnd, GWL_EXSTYLE) as u32;
+        if (ex & (WS_EX_TOOLWINDOW.0 | WS_EX_NOACTIVATE.0)) != 0 {
+            return false;
+        }
+        let style = GetWindowLongW(hwnd, GWL_STYLE) as u32;
+        (style & WS_THICKFRAME.0) != 0
+    }
+}
+fn existing_preview_rects(exclude: HWND) -> Vec<RECT> {
+    use windows::Win32::System::Threading::{
+        OpenProcess, PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
+        QueryFullProcessImageNameW,
+    };
+    let Ok(exe) = std::env::current_exe() else {
+        return Vec::new();
+    };
+    let Some(expected) = exe.file_name().map(|s| s.to_os_string()) else {
+        return Vec::new();
+    };
+    struct State {
+        exclude: HWND,
+        expected: std::ffi::OsString,
+        rects: Vec<RECT>,
+    }
+    unsafe extern "system" fn collect(hwnd: HWND, param: LPARAM) -> windows::core::BOOL {
+        unsafe {
+            let state = &mut *(param.0 as *mut State);
+            if hwnd == state.exclude
+                || !is_preview_window(hwnd)
+                || IsIconic(hwnd).as_bool()
+                || IsZoomed(hwnd).as_bool()
+            {
+                return true.into();
+            }
+            let mut pid = 0;
+            GetWindowThreadProcessId(hwnd, Some(&mut pid));
+            if pid == 0 {
+                return true.into();
+            }
+            let Ok(process) = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, false, pid) else {
+                return true.into();
+            };
+            let mut buf = [0u16; 512];
+            let mut len = buf.len() as u32;
+            let matched = QueryFullProcessImageNameW(
+                process,
+                PROCESS_NAME_WIN32,
+                windows::core::PWSTR(buf.as_mut_ptr()),
+                &mut len,
+            )
+            .is_ok()
+                && Path::new(&std::ffi::OsString::from(String::from_utf16_lossy(
+                    &buf[..len as usize],
+                )))
+                .file_name()
+                .is_some_and(|name| name.eq_ignore_ascii_case(&state.expected));
+            let _ = CloseHandle(process);
+            if matched {
+                let mut rect = RECT::default();
+                if GetWindowRect(hwnd, &mut rect).is_ok() {
+                    state.rects.push(rect);
+                }
+            }
+            true.into()
+        }
+    }
+    let mut state = State {
+        exclude,
+        expected,
+        rects: Vec::new(),
+    };
+    unsafe {
+        let _ = EnumWindows(Some(collect), LPARAM((&mut state as *mut State) as isize));
+    }
+    state.rects
 }
 #[cfg(feature = "gpui-preview")]
 pub fn classic_menu() -> bool {
@@ -275,12 +374,19 @@ fn activate_window(skip_animation: bool) {
             );
             let mut rect = RECT::default();
             let area = *PREVIEW_WORK_AREA.lock().unwrap();
+            let existing = existing_preview_rects(hwnd);
+            let step = ((40 * GetDpiForWindow(hwnd).max(96) as i32) / 96).max(24);
             if let Some(area) = area
                 && GetWindowRect(hwnd, &mut rect).is_ok()
             {
                 trace(&format!("initial bounds {rect:?}"));
-                let (x, y, width, height) =
-                    fit_preview(area, rect.right - rect.left, rect.bottom - rect.top);
+                let (x, y, width, height) = cascade_preview(
+                    area,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    step,
+                    &existing,
+                );
                 let _ = SetWindowPos(
                     hwnd,
                     Some(HWND_NOTOPMOST),
@@ -314,12 +420,18 @@ fn activate_window(skip_animation: bool) {
             let _ = ShowWindow(hwnd, SW_SHOWNORMAL);
             let _ = SetForegroundWindow(hwnd);
             // Moving between monitors can synchronously resize WinUI via
-            // WM_DPICHANGED. Center using the resulting physical size.
+            // WM_DPICHANGED. Position using the resulting physical size.
             if let Some(area) = area
                 && GetWindowRect(hwnd, &mut rect).is_ok()
             {
-                let (x, y, w, h) =
-                    fit_preview(area, rect.right - rect.left, rect.bottom - rect.top);
+                let step = ((40 * GetDpiForWindow(hwnd).max(96) as i32) / 96).max(24);
+                let (x, y, w, h) = cascade_preview(
+                    area,
+                    rect.right - rect.left,
+                    rect.bottom - rect.top,
+                    step,
+                    &existing,
+                );
                 let _ = SetWindowPos(hwnd, Some(HWND_TOP), x, y, w, h, SWP_SHOWWINDOW);
             }
             let mut final_rect = RECT::default();
@@ -531,10 +643,7 @@ fn window_for_process(owner: u32) -> Option<HWND> {
             let mut pid = 0;
             GetWindowThreadProcessId(hwnd, Some(&mut pid));
             let (owner, result) = &mut *(param.0 as *mut (u32, HWND));
-            if pid == *owner
-                && IsWindowVisible(hwnd).as_bool()
-                && GetWindow(hwnd, GW_OWNER).unwrap_or_default().0.is_null()
-            {
+            if pid == *owner && is_preview_window(hwnd) {
                 *result = hwnd;
                 return false.into();
             }
@@ -814,23 +923,28 @@ fn selection_worker(requests: std::sync::mpsc::Receiver<isize>) {
                     {
                         standby = standby_worker();
                     }
-                    let sent = standby.as_mut().is_some_and(|child| {
-                        let _ = AllowSetForegroundWindow(child.id());
-                        let Some(pipe) = child.stdin.as_mut() else {
-                            return false;
-                        };
-                        let mut frame = vec![0; 4];
-                        frame.extend(path.as_os_str().encode_wide().flat_map(u16::to_le_bytes));
-                        let len = (frame.len() - 4) as u32;
-                        frame[..4].copy_from_slice(&len.to_le_bytes());
-                        pipe.write_all(&frame).is_ok()
-                    });
-                    if !sent {
-                        standby = None;
-                    }
-                    if sent {
-                        used = true;
-                        continue;
+                    let standby_idle = standby
+                        .as_ref()
+                        .is_some_and(|child| window_for_process(child.id()).is_none());
+                    if standby_idle {
+                        let sent = standby.as_mut().is_some_and(|child| {
+                            let _ = AllowSetForegroundWindow(child.id());
+                            let Some(pipe) = child.stdin.as_mut() else {
+                                return false;
+                            };
+                            let mut frame = vec![0; 4];
+                            frame.extend(path.as_os_str().encode_wide().flat_map(u16::to_le_bytes));
+                            let len = (frame.len() - 4) as u32;
+                            frame[..4].copy_from_slice(&len.to_le_bytes());
+                            pipe.write_all(&frame).is_ok()
+                        });
+                        if !sent {
+                            standby = None;
+                        }
+                        if sent {
+                            used = true;
+                            continue;
+                        }
                     }
                 }
                 if let Ok(exe) = std::env::current_exe()
@@ -915,7 +1029,7 @@ pub fn run_broker() -> Result<(), String> {
 
 #[cfg(test)]
 mod window_bounds_tests {
-    use super::{RECT, fit_preview};
+    use super::{RECT, cascade_preview, fit_preview};
 
     #[test]
     fn fits_work_area_at_common_scales_and_desktop_origins() {
@@ -947,5 +1061,37 @@ mod window_bounds_tests {
                 }
             }
         }
+    }
+
+    #[test]
+    fn cascades_when_existing_preview_occupies_center() {
+        let area = RECT {
+            left: 0,
+            top: 0,
+            right: 1920,
+            bottom: 1040,
+        };
+        let (x0, y0, w, h) = cascade_preview(area, 920, 640, 40, &[]);
+        assert_eq!((x0, y0, w, h), (500, 200, 920, 640));
+
+        let first = RECT {
+            left: x0,
+            top: y0,
+            right: x0 + w,
+            bottom: y0 + h,
+        };
+        let (x1, y1, _, _) = cascade_preview(area, 920, 640, 40, &[first]);
+        assert_eq!((x1, y1), (540, 240));
+        assert!(x1 + w <= area.right && y1 + h <= area.bottom);
+
+        let second = RECT {
+            left: x1,
+            top: y1,
+            right: x1 + w,
+            bottom: y1 + h,
+        };
+        let (x2, y2, _, _) = cascade_preview(area, 920, 640, 40, &[first, second]);
+        assert_eq!((x2, y2), (580, 280));
+        assert!(x2 + w <= area.right && y2 + h <= area.bottom);
     }
 }
