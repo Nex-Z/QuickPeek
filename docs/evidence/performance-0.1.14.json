@@ -1,0 +1,986 @@
+{
+  "version": "0.1.14",
+  "commit": "154bdafbb3aa929d63cacd7d340091057a8f33a2",
+  "exe_sha256": "3c302f948e50bd3d531df475ff8b16301f03b82e1ee33793cb15b6d0f3f3f0d3",
+  "space": [
+    {
+      "round": "1",
+      "name": "amber.png",
+      "window_ms": "110",
+      "body_ms": "185"
+    },
+    {
+      "round": "2",
+      "name": "green.png",
+      "window_ms": "341",
+      "body_ms": "541"
+    },
+    {
+      "round": "3",
+      "name": "amber.png",
+      "window_ms": "100",
+      "body_ms": "167"
+    },
+    {
+      "round": "4",
+      "name": "green.png",
+      "window_ms": "407",
+      "body_ms": "594"
+    },
+    {
+      "round": "5",
+      "name": "amber.png",
+      "window_ms": "113",
+      "body_ms": "178"
+    },
+    {
+      "round": "6",
+      "name": "green.png",
+      "window_ms": "378",
+      "body_ms": "452"
+    },
+    {
+      "round": "7",
+      "name": "amber.png",
+      "window_ms": "106",
+      "body_ms": "290"
+    },
+    {
+      "round": "8",
+      "name": "green.png",
+      "window_ms": "237",
+      "body_ms": "304"
+    },
+    {
+      "round": "9",
+      "name": "amber.png",
+      "window_ms": "218",
+      "body_ms": "404"
+    },
+    {
+      "round": "10",
+      "name": "green.png",
+      "window_ms": "142",
+      "body_ms": "209"
+    },
+    {
+      "round": "11",
+      "name": "amber.png",
+      "window_ms": "333",
+      "body_ms": "520"
+    },
+    {
+      "round": "12",
+      "name": "green.png",
+      "window_ms": "90",
+      "body_ms": "157"
+    },
+    {
+      "round": "13",
+      "name": "amber.png",
+      "window_ms": "380",
+      "body_ms": "556"
+    },
+    {
+      "round": "14",
+      "name": "green.png",
+      "window_ms": "104",
+      "body_ms": "173"
+    },
+    {
+      "round": "15",
+      "name": "amber.png",
+      "window_ms": "392",
+      "body_ms": "579"
+    },
+    {
+      "round": "16",
+      "name": "green.png",
+      "window_ms": "102",
+      "body_ms": "170"
+    },
+    {
+      "round": "17",
+      "name": "amber.png",
+      "window_ms": "353",
+      "body_ms": "542"
+    },
+    {
+      "round": "18",
+      "name": "green.png",
+      "window_ms": "94",
+      "body_ms": "147"
+    },
+    {
+      "round": "19",
+      "name": "amber.png",
+      "window_ms": "401",
+      "body_ms": "587"
+    },
+    {
+      "round": "20",
+      "name": "green.png",
+      "window_ms": "93",
+      "body_ms": "187"
+    },
+    {
+      "round": "21",
+      "name": "amber.png",
+      "window_ms": "340",
+      "body_ms": "528"
+    },
+    {
+      "round": "22",
+      "name": "green.png",
+      "window_ms": "98",
+      "body_ms": "166"
+    },
+    {
+      "round": "23",
+      "name": "amber.png",
+      "window_ms": "383",
+      "body_ms": "574"
+    },
+    {
+      "round": "24",
+      "name": "green.png",
+      "window_ms": "109",
+      "body_ms": "163"
+    },
+    {
+      "round": "25",
+      "name": "amber.png",
+      "window_ms": "388",
+      "body_ms": "469"
+    },
+    {
+      "round": "26",
+      "name": "green.png",
+      "window_ms": "110",
+      "body_ms": "220"
+    },
+    {
+      "round": "27",
+      "name": "amber.png",
+      "window_ms": "125",
+      "body_ms": "313"
+    },
+    {
+      "round": "28",
+      "name": "green.png",
+      "window_ms": "225",
+      "body_ms": "292"
+    },
+    {
+      "round": "29",
+      "name": "amber.png",
+      "window_ms": "245",
+      "body_ms": "407"
+    },
+    {
+      "round": "30",
+      "name": "green.png",
+      "window_ms": "143",
+      "body_ms": "197"
+    }
+  ],
+  "gpui": [
+    {
+      "file": "example.rs",
+      "run": "1",
+      "first_paint_ms": "580",
+      "page_down_ms": "",
+      "working_set_MiB": "66.5",
+      "private_MiB": "173.5"
+    },
+    {
+      "file": "10mb.log",
+      "run": "1",
+      "first_paint_ms": "619",
+      "page_down_ms": "",
+      "working_set_MiB": "90.5",
+      "private_MiB": "199.4"
+    },
+    {
+      "file": "10mb.js",
+      "run": "1",
+      "first_paint_ms": "607",
+      "page_down_ms": "",
+      "working_set_MiB": "90.6",
+      "private_MiB": "200.5"
+    },
+    {
+      "file": "10mb.json",
+      "run": "1",
+      "first_paint_ms": "815",
+      "page_down_ms": "",
+      "working_set_MiB": "151.2",
+      "private_MiB": "267.2"
+    },
+    {
+      "file": "9mb.png",
+      "run": "1",
+      "first_paint_ms": "590",
+      "page_down_ms": "",
+      "working_set_MiB": "93.7",
+      "private_MiB": "186.1"
+    },
+    {
+      "file": "numbered.log",
+      "run": "1",
+      "first_paint_ms": "659",
+      "page_down_ms": "27",
+      "working_set_MiB": "82.6",
+      "private_MiB": "190.3"
+    },
+    {
+      "file": "example.rs",
+      "run": "2",
+      "first_paint_ms": "590",
+      "page_down_ms": "",
+      "working_set_MiB": "66.3",
+      "private_MiB": "174.2"
+    },
+    {
+      "file": "10mb.log",
+      "run": "2",
+      "first_paint_ms": "631",
+      "page_down_ms": "",
+      "working_set_MiB": "90.3",
+      "private_MiB": "200.2"
+    },
+    {
+      "file": "10mb.js",
+      "run": "2",
+      "first_paint_ms": "604",
+      "page_down_ms": "",
+      "working_set_MiB": "90.2",
+      "private_MiB": "200.3"
+    },
+    {
+      "file": "10mb.json",
+      "run": "2",
+      "first_paint_ms": "810",
+      "page_down_ms": "",
+      "working_set_MiB": "150.6",
+      "private_MiB": "265.8"
+    },
+    {
+      "file": "9mb.png",
+      "run": "2",
+      "first_paint_ms": "690",
+      "page_down_ms": "",
+      "working_set_MiB": "90.2",
+      "private_MiB": "185.6"
+    },
+    {
+      "file": "numbered.log",
+      "run": "2",
+      "first_paint_ms": "602",
+      "page_down_ms": "27",
+      "working_set_MiB": "82.5",
+      "private_MiB": "189.9"
+    },
+    {
+      "file": "example.rs",
+      "run": "3",
+      "first_paint_ms": "586",
+      "page_down_ms": "",
+      "working_set_MiB": "66.8",
+      "private_MiB": "175.1"
+    },
+    {
+      "file": "10mb.log",
+      "run": "3",
+      "first_paint_ms": "615",
+      "page_down_ms": "",
+      "working_set_MiB": "90.4",
+      "private_MiB": "201.1"
+    },
+    {
+      "file": "10mb.js",
+      "run": "3",
+      "first_paint_ms": "606",
+      "page_down_ms": "",
+      "working_set_MiB": "90.6",
+      "private_MiB": "199.6"
+    },
+    {
+      "file": "10mb.json",
+      "run": "3",
+      "first_paint_ms": "848",
+      "page_down_ms": "",
+      "working_set_MiB": "150.8",
+      "private_MiB": "266.0"
+    },
+    {
+      "file": "9mb.png",
+      "run": "3",
+      "first_paint_ms": "682",
+      "page_down_ms": "",
+      "working_set_MiB": "90.6",
+      "private_MiB": "187.2"
+    },
+    {
+      "file": "numbered.log",
+      "run": "3",
+      "first_paint_ms": "618",
+      "page_down_ms": "27",
+      "working_set_MiB": "82.4",
+      "private_MiB": "190.7"
+    }
+  ],
+  "classic": [
+    [
+      {
+        "file": "5mb.log",
+        "bytes": 5069412,
+        "readyMs": 1224,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.log",
+        "bytes": 10138824,
+        "readyMs": 1041,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.js",
+        "bytes": 5069412,
+        "readyMs": 981,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.js",
+        "bytes": 10138824,
+        "readyMs": 976,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.json",
+        "bytes": 4999996,
+        "readyMs": 1028,
+        "textLength": 6846149,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.json",
+        "bytes": 9999991,
+        "readyMs": 1102,
+        "textLength": 13692296,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.csv",
+        "bytes": 5070384,
+        "readyMs": 997,
+        "textLength": 5070384,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 70422
+      },
+      {
+        "file": "10mb.csv",
+        "bytes": 10140840,
+        "readyMs": 1076,
+        "textLength": 10140840,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 140845
+      },
+      {
+        "file": "large.xlsx",
+        "bytes": 10891100,
+        "readyMs": 1027,
+        "textLength": 0,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 50000
+      },
+      {
+        "file": "5mb.md",
+        "bytes": 4999977,
+        "readyMs": 1050,
+        "textLength": 4999977,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.md",
+        "bytes": 9999954,
+        "readyMs": 1012,
+        "textLength": 9999954,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "5mb.html",
+        "bytes": 4999995,
+        "readyMs": 1125,
+        "textLength": 4999995,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.html",
+        "bytes": 9999990,
+        "readyMs": 1079,
+        "textLength": 9999990,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      }
+    ],
+    [
+      {
+        "file": "5mb.log",
+        "bytes": 5069412,
+        "readyMs": 1459,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.log",
+        "bytes": 10138824,
+        "readyMs": 1041,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.js",
+        "bytes": 5069412,
+        "readyMs": 990,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.js",
+        "bytes": 10138824,
+        "readyMs": 987,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.json",
+        "bytes": 4999996,
+        "readyMs": 992,
+        "textLength": 6846149,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.json",
+        "bytes": 9999991,
+        "readyMs": 1031,
+        "textLength": 13692296,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.csv",
+        "bytes": 5070384,
+        "readyMs": 941,
+        "textLength": 5070384,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 70422
+      },
+      {
+        "file": "10mb.csv",
+        "bytes": 10140840,
+        "readyMs": 1116,
+        "textLength": 10140840,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 140845
+      },
+      {
+        "file": "large.xlsx",
+        "bytes": 10891100,
+        "readyMs": 1018,
+        "textLength": 0,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 50000
+      },
+      {
+        "file": "5mb.md",
+        "bytes": 4999977,
+        "readyMs": 985,
+        "textLength": 4999977,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.md",
+        "bytes": 9999954,
+        "readyMs": 1034,
+        "textLength": 9999954,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "5mb.html",
+        "bytes": 4999995,
+        "readyMs": 1031,
+        "textLength": 4999995,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.html",
+        "bytes": 9999990,
+        "readyMs": 1069,
+        "textLength": 9999990,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      }
+    ],
+    [
+      {
+        "file": "5mb.log",
+        "bytes": 5069412,
+        "readyMs": 1002,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.log",
+        "bytes": 10138824,
+        "readyMs": 1008,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.js",
+        "bytes": 5069412,
+        "readyMs": 976,
+        "textLength": 5069412,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.js",
+        "bytes": 10138824,
+        "readyMs": 1032,
+        "textLength": 10138824,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.json",
+        "bytes": 4999996,
+        "readyMs": 966,
+        "textLength": 6846149,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "10mb.json",
+        "bytes": 9999991,
+        "readyMs": 1097,
+        "textLength": 13692296,
+        "notice": "",
+        "rows": 0,
+        "chunks": 2,
+        "status": ""
+      },
+      {
+        "file": "5mb.csv",
+        "bytes": 5070384,
+        "readyMs": 984,
+        "textLength": 5070384,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 70422
+      },
+      {
+        "file": "10mb.csv",
+        "bytes": 10140840,
+        "readyMs": 992,
+        "textLength": 10140840,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 140845
+      },
+      {
+        "file": "large.xlsx",
+        "bytes": 10891100,
+        "readyMs": 960,
+        "textLength": 0,
+        "notice": "",
+        "rows": 100,
+        "chunks": 0,
+        "status": "",
+        "total": 50000
+      },
+      {
+        "file": "5mb.md",
+        "bytes": 4999977,
+        "readyMs": 985,
+        "textLength": 4999977,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.md",
+        "bytes": 9999954,
+        "readyMs": 941,
+        "textLength": 9999954,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "5mb.html",
+        "bytes": 4999995,
+        "readyMs": 1013,
+        "textLength": 4999995,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      },
+      {
+        "file": "10mb.html",
+        "bytes": 9999990,
+        "readyMs": 1077,
+        "textLength": 9999990,
+        "notice": "",
+        "rows": 0,
+        "chunks": 0,
+        "status": ""
+      }
+    ]
+  ],
+  "media": [
+    {
+      "file": "sample.pdf",
+      "run": "1",
+      "first_paint_ms": "1028",
+      "page_down_ms": "",
+      "working_set_MiB": "119.4",
+      "private_MiB": "85.0"
+    },
+    {
+      "file": "green.mp4",
+      "run": "1",
+      "first_paint_ms": "775",
+      "page_down_ms": "",
+      "working_set_MiB": "162.2",
+      "private_MiB": "145.8"
+    },
+    {
+      "file": "sample.pdf",
+      "run": "2",
+      "first_paint_ms": "1118",
+      "page_down_ms": "",
+      "working_set_MiB": "119.5",
+      "private_MiB": "84.1"
+    },
+    {
+      "file": "green.mp4",
+      "run": "2",
+      "first_paint_ms": "688",
+      "page_down_ms": "",
+      "working_set_MiB": "161.2",
+      "private_MiB": "143.7"
+    },
+    {
+      "file": "sample.pdf",
+      "run": "3",
+      "first_paint_ms": "1063",
+      "page_down_ms": "",
+      "working_set_MiB": "119.1",
+      "private_MiB": "84.6"
+    },
+    {
+      "file": "green.mp4",
+      "run": "3",
+      "first_paint_ms": "721",
+      "page_down_ms": "",
+      "working_set_MiB": "162.0",
+      "private_MiB": "145.3"
+    }
+  ],
+  "extra": [
+    {
+      "ext": "docx",
+      "run": 1,
+      "readyMs": 971,
+      "family": null
+    },
+    {
+      "ext": "pptx",
+      "run": 1,
+      "readyMs": 965,
+      "family": null
+    },
+    {
+      "ext": "zip",
+      "run": 1,
+      "readyMs": 1061,
+      "family": null
+    },
+    {
+      "ext": "7z",
+      "run": 1,
+      "readyMs": 940,
+      "family": null
+    },
+    {
+      "ext": "rar",
+      "run": 1,
+      "readyMs": 1014,
+      "family": null
+    },
+    {
+      "ext": "eml",
+      "run": 1,
+      "readyMs": 993,
+      "family": null
+    },
+    {
+      "ext": "md",
+      "run": 1,
+      "readyMs": 1007,
+      "family": null
+    },
+    {
+      "ext": "xlsx",
+      "run": 1,
+      "readyMs": 957,
+      "family": null
+    },
+    {
+      "ext": "docx",
+      "run": 2,
+      "readyMs": 1060,
+      "family": null
+    },
+    {
+      "ext": "pptx",
+      "run": 2,
+      "readyMs": 963,
+      "family": null
+    },
+    {
+      "ext": "zip",
+      "run": 2,
+      "readyMs": 1027,
+      "family": null
+    },
+    {
+      "ext": "7z",
+      "run": 2,
+      "readyMs": 985,
+      "family": null
+    },
+    {
+      "ext": "rar",
+      "run": 2,
+      "readyMs": 996,
+      "family": null
+    },
+    {
+      "ext": "eml",
+      "run": 2,
+      "readyMs": 999,
+      "family": null
+    },
+    {
+      "ext": "md",
+      "run": 2,
+      "readyMs": 1059,
+      "family": null
+    },
+    {
+      "ext": "xlsx",
+      "run": 2,
+      "readyMs": 994,
+      "family": null
+    },
+    {
+      "ext": "docx",
+      "run": 3,
+      "readyMs": 1014,
+      "family": {
+        "count": 8,
+        "wsMiB": 488.1,
+        "privateMiB": 266
+      }
+    },
+    {
+      "ext": "pptx",
+      "run": 3,
+      "readyMs": 1038,
+      "family": {
+        "count": 8,
+        "wsMiB": 491.1,
+        "privateMiB": 285.9
+      }
+    },
+    {
+      "ext": "zip",
+      "run": 3,
+      "readyMs": 951,
+      "family": {
+        "count": 7,
+        "wsMiB": 443,
+        "privateMiB": 246.8
+      }
+    },
+    {
+      "ext": "7z",
+      "run": 3,
+      "readyMs": 972,
+      "family": {
+        "count": 7,
+        "wsMiB": 444.7,
+        "privateMiB": 248.2
+      }
+    },
+    {
+      "ext": "rar",
+      "run": 3,
+      "readyMs": 940,
+      "family": {
+        "count": 7,
+        "wsMiB": 444,
+        "privateMiB": 249.4
+      }
+    },
+    {
+      "ext": "eml",
+      "run": 3,
+      "readyMs": 947,
+      "family": {
+        "count": 8,
+        "wsMiB": 488.4,
+        "privateMiB": 265.4
+      }
+    },
+    {
+      "ext": "md",
+      "run": 3,
+      "readyMs": 960,
+      "family": {
+        "count": 8,
+        "wsMiB": 588.2,
+        "privateMiB": 382.8
+      }
+    },
+    {
+      "ext": "xlsx",
+      "run": 3,
+      "readyMs": 977,
+      "family": {
+        "count": 7,
+        "wsMiB": 466,
+        "privateMiB": 286.3
+      }
+    }
+  ],
+  "idle": [
+    {
+      "pid": "37876",
+      "role": "tray",
+      "wsMiB": "29.9",
+      "privateMiB": "4",
+      "cpuSeconds": "0.015625",
+      "intervalSeconds": "8.04"
+    },
+    {
+      "pid": "61804",
+      "role": "standby",
+      "wsMiB": "48.7",
+      "privateMiB": "57.6",
+      "cpuSeconds": "0",
+      "intervalSeconds": "8.06"
+    }
+  ]
+}
