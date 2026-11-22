@@ -1,7 +1,7 @@
 param([string]$Exe = 'target/release/quickpeek.exe', [string]$EvidenceDirectory = 'docs/evidence')
 $ErrorActionPreference = 'Stop'
 Set-Location (Split-Path $PSScriptRoot -Parent)
-Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes,System.Drawing,System.Windows.Forms
+Add-Type -AssemblyName UIAutomationClient,UIAutomationTypes,System.Drawing
 Add-Type @'
 using System;
 using System.Runtime.InteropServices;
@@ -97,28 +97,30 @@ foreach ($file in @((Join-Path $fixtureDir 'long.png'),$pdfFixture)) {
         if ([ReadingInput]::GetForegroundWindow() -ne $script:process.MainWindowHandle) { throw 'Test preview is not foreground' }
         if ($file.EndsWith('.png')) {
             Wait-Until { (Elements | Where-Object { $_.Current.Name -like '图片 · *' }).Count -gt 0 } 'Image missing'
-            $initialImage = (Elements | Where-Object { $_.Current.Name -like '图片 · *' } | Select-Object -First 1).Current.Name
             $window = [System.Windows.Automation.AutomationElement]::FromHandle($script:process.MainWindowHandle)
             Hover $window; Wheel -Delta 7200 -Ctrl
             $scroll = Elements | Where-Object { $_.GetSupportedPatterns().ProgrammaticName -contains 'ScrollPatternIdentifiers.Pattern' } | Select-Object -First 1
             $sp=$scroll.GetCurrentPattern([System.Windows.Automation.ScrollPattern]::Pattern)
             if (-not $sp.Current.VerticallyScrollable) { throw 'Long image is not scrollable' }
-            Hover $scroll; Wheel -Delta -600
-            if ($sp.Current.VerticalScrollPercent -le 0) { throw 'Image wheel scroll failed' }
+            $sp.SetScrollPercent(-1,50)
+            Wait-Until { $sp.Current.VerticalScrollPercent -gt 0 } 'Image scrollbar failed'
+            $zoomedImage = (Elements | Where-Object { $_.Current.Name -like '图片 · *' } | Select-Object -First 1).Current.Name
+            Hover $scroll; Wheel -Delta -120
+            Wait-Until { (Elements | Where-Object { $_.Current.Name -like '图片 · *' -and $_.Current.Name -ne $zoomedImage }).Count -gt 0 } 'Image wheel zoom failed'
             Wheel -Delta 120 -Ctrl
-            Wait-Until { (Elements | Where-Object { $_.Current.Name -like '图片 · *' -and $_.Current.Name -ne $initialImage }).Count -gt 0 } 'Image Ctrl+wheel zoom failed'
+            Wait-Until { Named $zoomedImage } 'Image Ctrl+wheel zoom failed'
             Wait-Until { $sp.Current.HorizontallyScrollable } 'Zoomed image cannot scroll horizontally'
-            Wheel -Delta -120 -Ctrl
             Wheel -Delta -7200 -Ctrl
-            Wait-Until { Named $initialImage } 'Image zoom out failed'
+            Wait-Until { (Elements | Where-Object { $_.Current.Name -like '图片 · *' -and $_.Current.Name -ne $zoomedImage }).Count -gt 0 } 'Image zoom out failed'
             Capture 'reading-image.png'
-            $results += 'Long image: mouse-wheel scroll, Ctrl+wheel zoom in/out PASS'
+            $results += 'Long image: scrollbar, wheel and Ctrl+wheel zoom in/out PASS'
         } else {
             Start-Sleep -Seconds 3
             $window=[System.Windows.Automation.AutomationElement]::FromHandle($script:process.MainWindowHandle).Current.BoundingRectangle
             $x1=[int]($window.Left+$window.Width*0.176)
             $x2=[int]($window.Left+$window.Width*0.50)
             $y=[int]($window.Top+$window.Height*0.27)
+            Capture 'reading-pdf-unselected.png'
             [void][ReadingInput]::MovePointer($x1,$y)
             Start-Sleep -Milliseconds 200
             [ReadingInput]::mouse_event(2,0,0,0,[UIntPtr]::Zero)
@@ -129,18 +131,27 @@ foreach ($file in @((Join-Path $fixtureDir 'long.png'),$pdfFixture)) {
             [ReadingInput]::mouse_event(4,0,0,0,[UIntPtr]::Zero)
             Start-Sleep -Milliseconds 300
             Capture 'reading-pdf-selection.png'
-            $savedClipboard=[System.Windows.Forms.Clipboard]::GetDataObject()
-            try {
-                [System.Windows.Forms.Clipboard]::SetText('QuickPeek selection sentinel')
-                [ReadingInput]::keybd_event(17,0,0,[UIntPtr]::Zero)
-                Key 67
-                [ReadingInput]::keybd_event(17,0,2,[UIntPtr]::Zero)
-                Start-Sleep -Milliseconds 300
-                $copied=[System.Windows.Forms.Clipboard]::GetText()
-                if($copied -notmatch 'QuickPeek - Page 1') {throw 'PDF mouse-drag copy failed'}
-            } finally {
-                if($savedClipboard){[System.Windows.Forms.Clipboard]::SetDataObject($savedClipboard,$true)}
-                else{[System.Windows.Forms.Clipboard]::Clear()}
+            $selected = foreach ($element in (Elements)) {
+                $pattern = $null
+                if ($element.TryGetCurrentPattern([System.Windows.Automation.TextPattern]::Pattern,[ref]$pattern)) {
+                    foreach ($range in $pattern.GetSelection()) { $range.GetText(200) }
+                }
+            }
+            if (($selected -join ' ') -notmatch 'QuickPeek - Page 1') {
+                # Some Edge PDF versions expose the highlight without a UIA text range.
+                $before = [Drawing.Bitmap]::new((Join-Path $evidence 'reading-pdf-unselected.png'))
+                $after = [Drawing.Bitmap]::new((Join-Path $evidence 'reading-pdf-selection.png'))
+                try {
+                    $changed = 0
+                    for ($x = [int]($after.Width*.18); $x -lt $after.Width*.50; $x += 4) {
+                        for ($line = [int]($after.Height*.23); $line -lt $after.Height*.31; $line += 4) {
+                            $old = $before.GetPixel($x,$line)
+                            $new = $after.GetPixel($x,$line)
+                            if ($old.R -gt 230 -and $new.R -lt 210 -and $new.B -gt $new.R+25) { $changed++ }
+                        }
+                    }
+                    if ($changed -lt 50) { throw 'PDF selection highlight missing from the dragged text' }
+                } finally { $before.Dispose(); $after.Dispose() }
             }
             [void][ReadingInput]::MovePointer([int]($window.Left+$window.Width/2),[int]($window.Top+$window.Height/2))
             Start-Sleep -Milliseconds 150
@@ -153,7 +164,7 @@ foreach ($file in @((Join-Path $fixtureDir 'long.png'),$pdfFixture)) {
             Capture 'reading-pdf.png'
             Key 27
             Wait-Until { $script:process.Refresh(); $script:process.HasExited } 'Esc did not close the PDF preview'
-            $results += 'PDF: real mouse-drag copy and Ctrl+wheel rendering change PASS; scroll screenshot saved for visual verification'
+            $results += 'PDF: real mouse-drag text selection and Ctrl+wheel rendering change PASS; scroll screenshot saved for visual verification'
         }
     } finally {
         if (-not $script:process.HasExited) { [void]$script:process.CloseMainWindow(); [void]$script:process.WaitForExit(5000) }

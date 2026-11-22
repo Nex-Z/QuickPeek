@@ -68,7 +68,11 @@ pub fn trace(message: &str) {
             .append(true)
             .open(path)
         {
-            let _ = writeln!(f, "{} {message}", std::process::id());
+            let stamp = std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap_or_default()
+                .as_millis();
+            let _ = writeln!(f, "{stamp} {} {message}", std::process::id());
         }
     }
 }
@@ -167,7 +171,7 @@ fn app_icon() -> Option<HICON> {
         .ok()
     }
 }
-static PREVIEW_WORK_AREA: std::sync::OnceLock<RECT> = std::sync::OnceLock::new();
+static PREVIEW_WORK_AREA: std::sync::Mutex<Option<RECT>> = std::sync::Mutex::new(None);
 
 pub fn prepare_preview() {
     unsafe {
@@ -180,7 +184,7 @@ pub fn prepare_preview() {
         };
         if GetMonitorInfoW(monitor, &mut info).as_bool() {
             trace(&format!("work area {:?}", info.rcWork));
-            let _ = PREVIEW_WORK_AREA.set(info.rcWork);
+            *PREVIEW_WORK_AREA.lock().unwrap() = Some(info.rcWork);
         }
         SetThreadDpiAwarenessContext(previous);
     }
@@ -232,44 +236,35 @@ pub fn classic_menu() -> bool {
     }
 }
 #[cfg(feature = "gpui-preview")]
-pub fn explorer_focus_owner() -> u32 {
+pub fn grant_foreground(pid: u32) {
     unsafe {
-        let hwnd = GetForegroundWindow();
-        let mut owner = 0;
-        GetWindowThreadProcessId(hwnd, Some(&mut owner));
-        owner
-    }
-}
-#[cfg(feature = "gpui-preview")]
-pub fn recover_shell_focus(owner: u32) {
-    unsafe {
-        let mut class = [0u16; 64];
-        let n = GetClassNameW(GetForegroundWindow(), &mut class);
-        let mut shell = 0;
-        GetWindowThreadProcessId(
-            windows::Win32::UI::WindowsAndMessaging::GetShellWindow(),
-            Some(&mut shell),
-        );
-        trace(&format!(
-            "restore owner {owner} current {} shell {shell} class {}",
-            explorer_focus_owner(),
-            String::from_utf16_lossy(&class[..n as usize])
-        ));
-        if owner != 0
-            && (explorer_focus_owner() == owner || explorer_focus_owner() == shell)
-            && String::from_utf16_lossy(&class[..n as usize]) == "SysListView32"
-        {
-            activate_preview();
-        }
+        let _ = AllowSetForegroundWindow(pid);
     }
 }
 pub fn activate_preview() {
+    activate_window(false);
+}
+#[cfg(feature = "gpui-preview")]
+pub fn present_reader() {
+    activate_window(true);
+}
+fn activate_window(skip_animation: bool) {
     unsafe {
         let previous = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2);
         if let Some(hwnd) = current_window() {
             use windows::Win32::Graphics::Dwm::{
-                DWMWA_BORDER_COLOR, DWMWA_COLOR_NONE, DwmSetWindowAttribute,
+                DWMWA_BORDER_COLOR, DWMWA_COLOR_NONE, DWMWA_TRANSITIONS_FORCEDISABLED,
+                DwmSetWindowAttribute,
             };
+            if skip_animation {
+                let disable = windows::core::BOOL(1);
+                let _ = DwmSetWindowAttribute(
+                    hwnd,
+                    DWMWA_TRANSITIONS_FORCEDISABLED,
+                    (&raw const disable).cast(),
+                    size_of_val(&disable) as u32,
+                );
+            }
             let border = DWMWA_COLOR_NONE;
             let _ = DwmSetWindowAttribute(
                 hwnd,
@@ -278,12 +273,13 @@ pub fn activate_preview() {
                 size_of_val(&border) as u32,
             );
             let mut rect = RECT::default();
-            if let Some(area) = PREVIEW_WORK_AREA.get()
+            let area = *PREVIEW_WORK_AREA.lock().unwrap();
+            if let Some(area) = area
                 && GetWindowRect(hwnd, &mut rect).is_ok()
             {
                 trace(&format!("initial bounds {rect:?}"));
                 let (x, y, width, height) =
-                    fit_preview(*area, rect.right - rect.left, rect.bottom - rect.top);
+                    fit_preview(area, rect.right - rect.left, rect.bottom - rect.top);
                 let _ = SetWindowPos(
                     hwnd,
                     Some(HWND_NOTOPMOST),
@@ -318,11 +314,11 @@ pub fn activate_preview() {
             let _ = SetForegroundWindow(hwnd);
             // Moving between monitors can synchronously resize WinUI via
             // WM_DPICHANGED. Center using the resulting physical size.
-            if let Some(area) = PREVIEW_WORK_AREA.get()
+            if let Some(area) = area
                 && GetWindowRect(hwnd, &mut rect).is_ok()
             {
                 let (x, y, w, h) =
-                    fit_preview(*area, rect.right - rect.left, rect.bottom - rect.top);
+                    fit_preview(area, rect.right - rect.left, rect.bottom - rect.top);
                 let _ = SetWindowPos(hwnd, Some(HWND_TOP), x, y, w, h, SWP_SHOWWINDOW);
             }
             let mut final_rect = RECT::default();
@@ -526,25 +522,32 @@ pub fn pick_file() -> Option<PathBuf> {
 }
 
 pub fn current_window() -> Option<HWND> {
+    window_for_process(unsafe { GetCurrentProcessId() })
+}
+fn window_for_process(owner: u32) -> Option<HWND> {
     unsafe extern "system" fn collect(hwnd: HWND, param: LPARAM) -> windows::core::BOOL {
         unsafe {
             let mut pid = 0;
             GetWindowThreadProcessId(hwnd, Some(&mut pid));
-            if pid == GetCurrentProcessId()
+            let (owner, result) = &mut *(param.0 as *mut (u32, HWND));
+            if pid == *owner
                 && IsWindowVisible(hwnd).as_bool()
                 && GetWindow(hwnd, GW_OWNER).unwrap_or_default().0.is_null()
             {
-                *(param.0 as *mut HWND) = hwnd;
+                *result = hwnd;
                 return false.into();
             }
             true.into()
         }
     }
-    let mut result = HWND::default();
+    let mut data = (owner, HWND::default());
     unsafe {
-        let _ = EnumWindows(Some(collect), LPARAM((&mut result as *mut HWND) as isize));
+        let _ = EnumWindows(
+            Some(collect),
+            LPARAM((&mut data as *mut (u32, HWND)) as isize),
+        );
     }
-    (!result.0.is_null()).then_some(result)
+    (!data.1.0.is_null()).then_some(data.1)
 }
 
 fn explorer_selection(foreground: HWND) -> Option<PathBuf> {
@@ -725,7 +728,34 @@ fn selection_worker(requests: std::sync::mpsc::Receiver<isize>) {
                 CoCreateInstance(&CUIAutomation, None, CLSCTX_INPROC_SERVER).ok();
             #[cfg(feature = "gpui-preview")]
             let mut standby = standby_worker();
-            for target in requests {
+            #[cfg(feature = "gpui-preview")]
+            let mut used = false;
+            loop {
+                #[cfg(feature = "gpui-preview")]
+                let target = if used {
+                    match requests.recv_timeout(std::time::Duration::from_secs(30)) {
+                        Ok(hwnd) => hwnd,
+                        Err(std::sync::mpsc::RecvTimeoutError::Disconnected) => break,
+                        Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
+                            if standby
+                                .as_ref()
+                                .is_some_and(|p| window_for_process(p.id()).is_none())
+                            {
+                                drop(standby.take());
+                                standby = standby_worker();
+                                used = false;
+                            }
+                            continue;
+                        }
+                    }
+                } else if let Ok(hwnd) = requests.recv() {
+                    hwnd
+                } else {
+                    break;
+                };
+                #[cfg(not(feature = "gpui-preview"))]
+                let Ok(target) = requests.recv() else { break };
+                trace("preview request");
                 let hwnd = HWND(target as *mut _);
                 if GetForegroundWindow() != hwnd || focused_editable(automation.as_ref()) {
                     continue;
@@ -745,21 +775,30 @@ fn selection_worker(requests: std::sync::mpsc::Receiver<isize>) {
                 }
                 #[cfg(feature = "gpui-preview")]
                 if crate::gpui_preview::supports(&path) {
+                    trace("selection ready");
                     use std::{io::Write, os::windows::ffi::OsStrExt};
-                    let sent = standby.take().is_some_and(|mut child| {
-                        let Some(mut pipe) = child.stdin.take() else {
+                    if standby
+                        .as_mut()
+                        .is_none_or(|child| !matches!(child.try_wait(), Ok(None)))
+                    {
+                        standby = standby_worker();
+                    }
+                    let sent = standby.as_mut().is_some_and(|child| {
+                        let _ = AllowSetForegroundWindow(child.id());
+                        let Some(pipe) = child.stdin.as_mut() else {
                             return false;
                         };
-                        let _ = AllowSetForegroundWindow(child.id());
-                        let bytes = path
-                            .as_os_str()
-                            .encode_wide()
-                            .flat_map(u16::to_le_bytes)
-                            .collect::<Vec<_>>();
-                        pipe.write_all(&bytes).is_ok()
+                        let mut frame = vec![0; 4];
+                        frame.extend(path.as_os_str().encode_wide().flat_map(u16::to_le_bytes));
+                        let len = (frame.len() - 4) as u32;
+                        frame[..4].copy_from_slice(&len.to_le_bytes());
+                        pipe.write_all(&frame).is_ok()
                     });
-                    standby = standby_worker();
+                    if !sent {
+                        standby = None;
+                    }
                     if sent {
+                        used = true;
                         continue;
                     }
                 }

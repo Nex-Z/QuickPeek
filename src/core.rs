@@ -47,6 +47,20 @@ impl Kind {
         )
     }
 
+    pub fn web_reader(self) -> bool {
+        self.rich_file()
+            || matches!(
+                self,
+                Kind::Text
+                    | Kind::Code
+                    | Kind::Json
+                    | Kind::Markdown
+                    | Kind::Html
+                    | Kind::Csv
+                    | Kind::Spreadsheet
+            )
+    }
+
     pub fn label(self) -> &'static str {
         match self {
             Self::Folder => "文件夹",
@@ -274,19 +288,7 @@ fn load_document(
         preview: None,
         image,
     };
-    if prepare_reader
-        && (kind.rich_file()
-            || matches!(
-                kind,
-                Kind::Text
-                    | Kind::Code
-                    | Kind::Json
-                    | Kind::Markdown
-                    | Kind::Html
-                    | Kind::Csv
-                    | Kind::Spreadsheet
-            ))
-    {
+    if prepare_reader && kind.web_reader() {
         document.preview = Some(std::sync::Arc::new(crate::reading::prepare(
             path, &document, &cancelled,
         )?));

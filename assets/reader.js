@@ -15,7 +15,7 @@ const language=aliases[data.language.toLowerCase()]||data.language.toLowerCase()
 const idle=work=>window.requestIdleCallback?requestIdleCallback(work,{timeout:300}):setTimeout(work,0);
 function paintCode(code,text,generation){
  code.textContent=text;
- if(language==='plaintext'||!hljs.getLanguage(language))return;
+ if(language==='plaintext'||!window.hljs?.getLanguage(language))return;
  idle(()=>{
   if(generation!==renderId||!code.isConnected)return;
   // Restrict expensive grammar work per visible chunk, not per file.
@@ -28,7 +28,8 @@ function paintCode(code,text,generation){
 }
 function showText(text){
  currentText=text;
- const lines=text.split('\n').filter(line=>!query||line.toLocaleLowerCase().includes(query));
+ const allLines=text.split('\n');
+ const lines=query?allLines.filter(line=>line.toLocaleLowerCase().includes(query)):allLines;
  const generation=renderId,fragment=document.createDocumentFragment(),chunks=[];
  const mount=pre=>{
   if(pre.dataset.mounted)return;pre.dataset.mounted='true';

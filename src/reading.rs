@@ -282,6 +282,7 @@ pub fn prepare(
     serde_json::to_writer(&mut writer, &payload).map_err(|e| e.to_string())?;
     writer.write_all(b";").map_err(|e| e.to_string())?;
     writer.flush().map_err(|e| e.to_string())?;
+    let mut highlight_scripts = String::new();
     for (suffix, bytes) in [
         ("js", include_bytes!("../assets/reader.js").as_slice()),
         ("css", include_bytes!("../assets/reader.css").as_slice()),
@@ -294,11 +295,26 @@ pub fn prepare(
             include_bytes!("../assets/vendor/powershell.min.js").as_slice(),
         ),
     ] {
+        if suffix == "highlight.js" || suffix == "powershell.js" {
+            if language == "plaintext"
+                || doc.kind == Kind::Markdown
+                || (suffix == "powershell.js"
+                    && !language.eq_ignore_ascii_case("ps1")
+                    && !language.eq_ignore_ascii_case("psm1")
+                    && !language.eq_ignore_ascii_case("psd1"))
+            {
+                continue;
+            }
+            highlight_scripts
+                .push_str(&format!(r#"<script src="{stem}.{suffix}" defer></script>"#));
+        }
         let target = directory.join(format!("{stem}.{suffix}"));
         preview.1.push(target.clone());
         std::fs::write(target, bytes).map_err(|e| e.to_string())?;
     }
-    let html = include_str!("../assets/reader.html").replace("__STEM__", &stem);
+    let html = include_str!("../assets/reader.html")
+        .replace("__STEM__", &stem)
+        .replace("__HIGHLIGHT_SCRIPTS__", &highlight_scripts);
     std::fs::write(&preview.0, html).map_err(|e| e.to_string())?;
     Ok(preview)
 }

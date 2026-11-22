@@ -175,9 +175,9 @@ impl Render for Reader {
                 gpui::MouseButton::Left,
                 cx.listener(|this, _, _, _| this.thumb_grab = None),
             )
-            .on_key_down(cx.listener(
-                |this, e: &KeyDownEvent, _, cx| match e.keystroke.key.as_str() {
-                    "escape" | "space" if !e.is_held => cx.quit(),
+            .on_key_down(cx.listener(|this, e: &KeyDownEvent, window, cx| {
+                match e.keystroke.key.as_str() {
+                    "escape" | "space" if !e.is_held => window.remove_window(),
                     "pagedown" | "pageup" if this.image.is_none() => {
                         let height = this.rows.viewport_bounds().size.height;
                         this.rows.scroll_by(if e.keystroke.key == "pagedown" {
@@ -189,8 +189,8 @@ impl Render for Reader {
                     }
                     "enter" => this.classic(cx),
                     _ => {}
-                },
-            ))
+                }
+            }))
             .on_mouse_down(
                 gpui::MouseButton::Right,
                 cx.listener(|this, _, _, cx| {
@@ -407,6 +407,7 @@ impl Reader {
 }
 
 fn open(cx: &mut App, path: PathBuf) -> Result<(), String> {
+    super::platform::trace("reader received");
     let path = path.canonicalize().map_err(|e| e.to_string())?;
     let kind = core::detect(&path);
     let image = if kind == Kind::Image {
@@ -435,17 +436,19 @@ fn open(cx: &mut App, path: PathBuf) -> Result<(), String> {
         .to_string_lossy()
         .into_owned();
     super::platform::prepare_preview();
-    cx.on_window_closed(|cx| {
-        if cx.windows().is_empty() {
-            cx.quit();
-        }
-    })
-    .detach();
-    let owner = super::platform::explorer_focus_owner();
     let bounds = Bounds::centered(None, size(px(920.), px(640.)), cx);
+    // Start decoding while Windows creates the swap chain. The view and this
+    // task share GPUI's loader, including animated formats.
+    let image_resource = image
+        .as_ref()
+        .map(|_| gpui::Resource::Path(path.clone().into()));
+    let decoding = image_resource
+        .as_ref()
+        .map(|resource| cx.fetch_asset::<gpui::ImgResourceLoader>(resource).0);
     let result = cx.open_window(
         WindowOptions {
             window_bounds: Some(WindowBounds::Windowed(bounds)),
+            focus: false,
             titlebar: Some(TitlebarOptions {
                 title: Some(title.into()),
                 appears_transparent: true,
@@ -455,19 +458,15 @@ fn open(cx: &mut App, path: PathBuf) -> Result<(), String> {
         },
         move |window, cx| {
             cx.new(|cx| {
+                if image.is_some() {
+                    let asset = gpui::ImageSource::from(path.clone());
+                    cx.on_release(move |_, cx| asset.remove_asset(cx)).detach();
+                }
                 let focus = cx.focus_handle();
                 window.focus(&focus);
-                window.activate_window();
-                window.on_next_frame(move |_, cx| {
-                    super::platform::activate_preview();
-                    cx.spawn(async move |cx| {
-                        cx.background_executor()
-                            .timer(std::time::Duration::from_millis(120))
-                            .await;
-                        let _ = cx.update(move |_| super::platform::recover_shell_focus(owner));
-                    })
-                    .detach();
-                });
+                // The broker has granted foreground permission. GPUI's Windows
+                // activation also synthesizes Alt, which can redirect focus to Explorer.
+                super::platform::present_reader();
                 Reader {
                     path,
                     focus,
@@ -482,7 +481,24 @@ fn open(cx: &mut App, path: PathBuf) -> Result<(), String> {
             })
         },
     );
-    result.map(|_| ()).map_err(|err| err.to_string())
+    match result {
+        Ok(window) => {
+            if let Some(decoding) = decoding {
+                cx.spawn(async move |cx| {
+                    let _ = decoding.await;
+                    let _ = window.update(cx, |_, window, _| window.refresh());
+                })
+                .detach();
+            }
+            Ok(())
+        }
+        Err(err) => {
+            if let Some(resource) = image_resource {
+                cx.remove_asset::<gpui::ImgResourceLoader>(&resource);
+            }
+            Err(err.to_string())
+        }
+    }
 }
 
 fn open_or_quit(cx: &mut App, path: PathBuf) {
@@ -497,27 +513,74 @@ pub fn run(path: PathBuf) -> Result<(), String> {
     Ok(())
 }
 
-pub fn standby() {
+fn next_path() -> Option<PathBuf> {
     use std::{io::Read, os::windows::ffi::OsStringExt};
-    let app = Application::new();
-    let mut bytes = Vec::new();
-    if std::io::stdin()
-        .take(65537)
-        .read_to_end(&mut bytes)
-        .is_err()
-        || bytes.is_empty()
-        || bytes.len() > 65536
-        || bytes.len() % 2 != 0
-    {
-        return;
+    let mut pipe = std::io::stdin().lock();
+    let mut length = [0; 4];
+    pipe.read_exact(&mut length).ok()?;
+    let n = u32::from_le_bytes(length) as usize;
+    if n == 0 || n > 65536 || !n.is_multiple_of(2) {
+        return None;
     }
+    let mut bytes = vec![0; n];
+    pipe.read_exact(&mut bytes).ok()?;
     let wide = bytes
         .as_chunks::<2>()
         .0
         .iter()
         .map(|b| u16::from_le_bytes(*b))
         .collect::<Vec<_>>();
-    let path = PathBuf::from(std::ffi::OsString::from_wide(&wide));
+    Some(PathBuf::from(std::ffi::OsString::from_wide(&wide)))
+}
 
-    app.run(move |cx| open_or_quit(cx, path));
+pub fn standby() {
+    let app = Application::new();
+    let Some(first) = next_path() else { return };
+    app.run(move |cx| {
+        // GPUI's Windows backend exits its message loop when its last window closes.
+        let anchor = cx.open_window(
+            WindowOptions {
+                show: false,
+                focus: false,
+                window_bounds: Some(WindowBounds::Windowed(Bounds::centered(
+                    None,
+                    size(px(1.), px(1.)),
+                    cx,
+                ))),
+                ..Default::default()
+            },
+            |_, cx| cx.new(|_| gpui::EmptyView),
+        );
+        let Ok(anchor) = anchor else {
+            open_or_quit(cx, first);
+            return;
+        };
+        if let Err(e) = open(cx, first) {
+            super::platform::show_error(&e)
+        }
+        cx.spawn(async move |cx| {
+            loop {
+                let path = cx.background_executor().spawn(async { next_path() }).await;
+                let Some(path) = path else { break };
+                if cx
+                    .update(|cx| {
+                        if cx.windows().len() == 1 {
+                            if let Err(e) = open(cx, path) {
+                                super::platform::show_error(&e)
+                            }
+                        } else if let Ok(exe) = std::env::current_exe()
+                            && let Ok(child) = Command::new(exe).arg("--preview").arg(path).spawn()
+                        {
+                            super::platform::grant_foreground(child.id());
+                        }
+                    })
+                    .is_err()
+                {
+                    break;
+                }
+            }
+            let _ = anchor.update(cx, |_, window, _| window.remove_window());
+        })
+        .detach();
+    });
 }

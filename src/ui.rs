@@ -17,6 +17,8 @@ struct Preview {
     error: String,
     generation: u64,
     loading: bool,
+    reader_expected: bool,
+    reader_navigated: bool,
     page: usize,
     pages: usize,
     zoom: f64,
@@ -46,6 +48,7 @@ enum Msg {
     Loaded(u64, Result<Document, String>),
     FilesLoaded(u64, Vec<PathBuf>),
     PdfReady(u64, Result<(), String>),
+    ReaderReady(u64, Result<(), String>),
     Open,
     Browse(PathBuf),
     PreviewChild(PathBuf),
@@ -88,6 +91,8 @@ impl Preview {
         if let Some(task) = self.task.take() {
             task.cancel();
         }
+        self.reader_expected = core::detect(&path).web_reader() && !path.is_dir();
+        self.reader_navigated = false;
         self.path = Some(path.clone());
         self.generation += 1;
         self.document = None;
@@ -145,6 +150,8 @@ impl Component for Preview {
             error: String::new(),
             generation: 0,
             loading: false,
+            reader_expected: false,
+            reader_navigated: false,
             page: 0,
             pages: 1,
             zoom: 1.0,
@@ -270,6 +277,9 @@ impl Component for Preview {
                         .max(1);
                         platform::wheel::image_zoom(doc.kind == Kind::Image);
                         self.document = Some(doc);
+                        if let Err(e) = self.navigate_reader() {
+                            self.error = e;
+                        }
                         if self.kind() == Kind::Pdf {
                             platform::pdf_active(true);
                         }
@@ -299,6 +309,11 @@ impl Component for Preview {
                         .rem_euclid(self.files.len() as i32)
                         as usize;
                     self.load(self.files[index].clone(), c);
+                }
+            }
+            Msg::ReaderReady(g, result) if g == self.generation => {
+                if let Err(e) = result.and_then(|_| self.navigate_reader()) {
+                    self.error = e
                 }
             }
             Msg::PdfReady(generation, Err(error)) if generation == self.generation => {
@@ -632,9 +647,63 @@ impl Preview {
                 10.0,
             ))
     }
+    fn navigate_reader(&mut self) -> Result<(), String> {
+        if self.reader_navigated {
+            return Ok(());
+        }
+        let Some(doc) = self.document.as_ref() else {
+            return Ok(());
+        };
+        let Some(preview) = doc.preview.as_ref() else {
+            return Ok(());
+        };
+        let reader = self.reader.borrow();
+        let Some(webview) = reader.as_ref() else {
+            return Ok(());
+        };
+        if let Some(archive) = self.path.as_ref().filter(|_| doc.kind == Kind::Archive) {
+            let origin = url::Url::from_file_path(&preview.0).map_err(|_| "预览路径无效")?;
+            let archive = archive.clone();
+            let registration = webview
+                .on_web_message_received(move |msg| {
+                    if url::Url::parse(&msg.source()).ok().as_ref() != Some(&origin) {
+                        return;
+                    }
+                    if let Ok(name) = msg.try_web_message_as_string()
+                        && let Ok(exe) = std::env::current_exe()
+                    {
+                        let _ = std::process::Command::new(exe)
+                            .arg("--archive-member")
+                            .arg(&archive)
+                            .arg(name)
+                            .spawn();
+                    }
+                })
+                .map_err(|e| e.to_string())?;
+            *self.member_listener.borrow_mut() = Some(registration);
+        }
+        platform::pdf::open(webview, &preview.0)?;
+
+        self.reader_navigated = true;
+        Ok(())
+    }
     fn content(&self, c: &ViewContext<Self>, ink: Color, muted: Color) -> View {
         if !self.error.is_empty() {
             return self.center(&self.error, ink);
+        }
+        if (self.loading && self.reader_expected)
+            || self.document.as_ref().is_some_and(|d| d.preview.is_some())
+        {
+            let reader = self.reader.clone();
+            let generation = self.generation;
+            return windows_webview::webview_result(c.callback(
+                move |result: Result<windows_webview::WebView, IntegrationError>| {
+                    let result = result
+                        .map(|view| *reader.borrow_mut() = Some(view))
+                        .map_err(|e| format!("阅读器初始化失败：{e:?}"));
+                    Msg::ReaderReady(generation, result)
+                },
+            ));
         }
         if self.loading {
             return self.center("正在加载…", muted);
@@ -645,49 +714,6 @@ impl Preview {
                 .vertical_alignment(VerticalAlignment::Center)
                 .content(self.button("打开文件…", Msg::Open, c));
         };
-        if let Some(preview) = &doc.preview {
-            let preview = preview.clone();
-            let reader = self.reader.clone();
-            let listener = self.member_listener.clone();
-            let archive = self.path.clone().filter(|_| doc.kind == Kind::Archive);
-            let generation = self.generation;
-            return windows_webview::webview_result(c.callback(
-                move |result: Result<windows_webview::WebView, IntegrationError>| {
-                    let result = result
-                        .map_err(|e| format!("阅读器初始化失败：{e:?}"))
-                        .and_then(|webview| {
-                            if let Some(archive) = archive.as_ref() {
-                                let origin = url::Url::from_file_path(&preview.0)
-                                    .map_err(|_| "预览路径无效")?;
-                                let archive = archive.clone();
-                                let registration = webview
-                                    .on_web_message_received(move |msg| {
-                                        if url::Url::parse(&msg.source()).ok().as_ref()
-                                            != Some(&origin)
-                                        {
-                                            return;
-                                        }
-                                        if let Ok(name) = msg.try_web_message_as_string()
-                                            && let Ok(exe) = std::env::current_exe()
-                                        {
-                                            let _ = std::process::Command::new(exe)
-                                                .arg("--archive-member")
-                                                .arg(&archive)
-                                                .arg(name)
-                                                .spawn();
-                                        }
-                                    })
-                                    .map_err(|e| e.to_string())?;
-                                *listener.borrow_mut() = Some(registration);
-                            }
-                            platform::pdf::open(&webview, &preview.0)?;
-                            *reader.borrow_mut() = Some(webview);
-                            Ok(())
-                        });
-                    Msg::PdfReady(generation, result)
-                },
-            ));
-        }
         match doc.kind {
             Kind::Folder => {
                 let mut entries = Vec::new();
