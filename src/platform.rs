@@ -771,6 +771,36 @@ unsafe extern "system" fn keyboard(code: i32, wparam: WPARAM, lparam: LPARAM) ->
     }
 }
 
+static ABOUT_OPEN: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+
+fn show_about() {
+    if ABOUT_OPEN.swap(true, Ordering::AcqRel) {
+        return;
+    }
+    std::thread::spawn(|| {
+        let version = env!("CARGO_PKG_VERSION");
+        let build_date = env!("QUICKPEEK_BUILD_DATE");
+        let git_hash = env!("QUICKPEEK_GIT_HASH");
+        let mut text = format!("QuickPeek v{version}\n构建日期：{build_date}");
+        if !git_hash.is_empty() {
+            text.push_str(&format!("\n提交版本：{git_hash}"));
+        }
+        text.push_str(&format!(
+            "\n运行架构：Windows {}\n\n选中文件后按空格键即可快速预览。\nhttps://github.com/Nex-Z/QuickPeek",
+            std::env::consts::ARCH
+        ));
+        unsafe {
+            MessageBoxW(
+                None,
+                &HSTRING::from(text),
+                w!("关于 QuickPeek"),
+                MB_OK | MB_ICONINFORMATION | MB_SETFOREGROUND | MB_TOPMOST,
+            );
+        }
+        ABOUT_OPEN.store(false, Ordering::Release);
+    });
+}
+
 unsafe extern "system" fn broker_proc(hwnd: HWND, msg: u32, w: WPARAM, l: LPARAM) -> LRESULT {
     unsafe {
         match msg {
@@ -802,6 +832,8 @@ unsafe extern "system" fn broker_proc(hwnd: HWND, msg: u32, w: WPARAM, l: LPARAM
                     let _ = AppendMenuW(menu, checked(updates::automatic()), 4, w!("自动更新"));
                     let _ = AppendMenuW(menu, checked(updates::startup()), 5, w!("开机自启"));
                     let _ = AppendMenuW(menu, MF_SEPARATOR, 0, None);
+                    let _ = AppendMenuW(menu, MF_STRING, 6, w!("关于 QuickPeek…"));
+                    let _ = AppendMenuW(menu, MF_SEPARATOR, 0, None);
                     let _ = AppendMenuW(menu, MF_STRING, 2, w!("退出 QuickPeek"));
                     let mut point = POINT::default();
                     let _ = GetCursorPos(&mut point);
@@ -822,6 +854,8 @@ unsafe extern "system" fn broker_proc(hwnd: HWND, msg: u32, w: WPARAM, l: LPARAM
                         if let Err(e) = updates::toggle_startup() {
                             show_error(&e);
                         }
+                    } else if choice == 6 {
+                        show_about();
                     } else if choice == 2 {
                         let _ = DestroyWindow(hwnd);
                     } else if choice == 1
@@ -1001,7 +1035,13 @@ pub fn run_broker() -> Result<(), String> {
                 .unwrap_or(LoadIconW(None, IDI_APPLICATION).map_err(|e| e.to_string())?),
             ..Default::default()
         };
-        let tip: Vec<u16> = "QuickPeek · 选中文件，按空格预览".encode_utf16().collect();
+        let tip: Vec<u16> = format!(
+            "QuickPeek v{} · 选中文件，按空格预览",
+            env!("CARGO_PKG_VERSION")
+        )
+        .encode_utf16()
+        .take(data.szTip.len() - 1)
+        .collect();
         data.szTip[..tip.len()].copy_from_slice(&tip);
         if !Shell_NotifyIconW(NIM_ADD, &data).as_bool() {
             return Err("无法创建托盘图标".into());

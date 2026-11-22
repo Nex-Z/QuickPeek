@@ -1,4 +1,4 @@
-#define AppVersion "0.1.19"
+#define AppVersion "0.1.20"
 #define Bundle "QuickPeek-" + AppVersion + "-windows-x64"
 
 [Setup]

@@ -24,7 +24,14 @@ function Install-Update($asset, $exe, $broker) {
     try {
         $setup = Join-Path $stage 'setup.exe'
         Invoke-WebRequest -UseBasicParsing -Uri $asset.browser_download_url -OutFile $setup -TimeoutSec 300
-        if (('sha256:' + (Get-FileHash -LiteralPath $setup -Algorithm SHA256).Hash) -ne $asset.digest) { throw '下载文件的 SHA-256 校验失败。' }
+        $sha256 = [Security.Cryptography.SHA256]::Create()
+        try {
+            $stream = [IO.File]::OpenRead($setup)
+            try {
+                $actual = 'sha256:' + ([BitConverter]::ToString($sha256.ComputeHash($stream)).Replace('-', '').ToLowerInvariant())
+            } finally { $stream.Dispose() }
+        } finally { $sha256.Dispose() }
+        if ($actual -ne $asset.digest) { throw '下载文件的 SHA-256 校验失败。' }
         if (!$manual -and !(AutoEnabled)) { return }
         Add-Type @"
 using System;
