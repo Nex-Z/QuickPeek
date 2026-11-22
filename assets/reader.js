@@ -86,14 +86,29 @@ function prepareRichPages(){
   batch.push(node);if(node.nodeType===1)elements++;
   if(elements>=160){groups.push(batch);batch=[];elements=0}
  }if(batch.length)groups.push(batch);
- richPages=groups.map(nodes=>{
-  let pageRoot=root.cloneNode(false);pageRoot.append(...nodes);
+ // Serialize a page only when it is first displayed.
+ richPages=new Array(groups.length);
+ groups.forEach((_,index)=>Object.defineProperty(richPages,index,{configurable:true,get(){
+  const nodes=groups[index];
+  let pageRoot=root.cloneNode(false);for(const node of nodes)pageRoot.appendChild(node);
   for(let parent=root.parentElement;root!==parsed.body&&parent;parent=parent.parentElement){
    if(parent===parsed.documentElement)break;
    const wrapper=parent.cloneNode(false);wrapper.append(pageRoot);pageRoot=wrapper;
   }
-  return pageRoot.outerHTML;
- });
+  const value=pageRoot.outerHTML;
+  Object.defineProperty(richPages,index,{value,configurable:true});
+  groups[index]=null;
+  return value;
+ }}));
+ // Release the detached DOM in short idle slices after the first paint.
+ const pages=richPages;
+ let next=1;
+ function finishPages(){
+  const start=performance.now();
+  while(next<pages.length && performance.now()-start<4){void pages[next++];}
+  if(next<pages.length)idle(finishPages);
+ }
+ requestAnimationFrame(()=>requestAnimationFrame(()=>idle(finishPages)));
  richHead+=head;
 }
 let lastMarkdownQuery='', matchingPages=[];

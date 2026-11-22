@@ -1,6 +1,6 @@
 use crate::core::{Document, Kind};
 use base64::Engine;
-use calamine::Reader;
+use calamine::{Reader, ReaderRef};
 use serde::Serialize;
 use std::{
     io::{BufWriter, Write},
@@ -28,6 +28,30 @@ struct Sheet {
     name: String,
     rows: Vec<Vec<String>>,
     total: usize,
+}
+
+fn sheet_from_range<T>(mut range: calamine::Range<T>, name: String, notice: &mut String) -> Sheet
+where
+    T: calamine::CellType + Into<calamine::Data>,
+{
+    let total = range.height();
+    let row_limit = (2_000_000 / range.width().clamp(1, 256)).min(250_000);
+    if total > row_limit || range.width() > 256 {
+        notice.push_str(&format!(" 大工作表仅预览前 {row_limit} 行 / 256 列。"));
+    }
+    let rows = (0..total.min(row_limit))
+        .map(|index| {
+            range[index]
+                .iter_mut()
+                .take(256)
+                .map(|cell| match std::mem::take(cell).into() {
+                    calamine::Data::String(text) => text,
+                    other => other.to_string(),
+                })
+                .collect()
+        })
+        .collect();
+    Sheet { name, rows, total }
 }
 
 #[derive(Serialize)]
@@ -122,18 +146,19 @@ pub fn prepare(
             if cancelled() {
                 return Err("预览已取消".into());
             }
-            let range = workbook.worksheet_range(&name).map_err(|e| e.to_string())?;
-            let total = range.height();
-            let row_limit = (2_000_000 / range.width().clamp(1, 256)).min(250_000);
-            if total > row_limit || range.width() > 256 {
-                notice.push_str(&format!(" 大工作表仅预览前 {row_limit} 行 / 256 列。"));
-            }
-            let rows = range
-                .rows()
-                .take(row_limit)
-                .map(|row| row.iter().take(256).map(ToString::to_string).collect())
-                .collect();
-            sheets.push(Sheet { name, rows, total });
+            let sheet = match workbook {
+                calamine::Sheets::Xlsx(_) | calamine::Sheets::Xlsb(_) => {
+                    let range = workbook
+                        .worksheet_range_ref(&name)
+                        .map_err(|e| e.to_string())?;
+                    sheet_from_range(range, name, &mut notice)
+                }
+                _ => {
+                    let range = workbook.worksheet_range(&name).map_err(|e| e.to_string())?;
+                    sheet_from_range(range, name, &mut notice)
+                }
+            };
+            sheets.push(sheet);
         }
     }
     let mut archive_entries = Vec::new();
@@ -285,7 +310,6 @@ pub fn prepare(
     let mut highlight_scripts = String::new();
     for (suffix, bytes) in [
         ("js", include_bytes!("../assets/reader.js").as_slice()),
-        ("css", include_bytes!("../assets/reader.css").as_slice()),
         (
             "highlight.js",
             include_bytes!("../assets/vendor/highlight.min.js").as_slice(),
@@ -313,6 +337,7 @@ pub fn prepare(
         std::fs::write(target, bytes).map_err(|e| e.to_string())?;
     }
     let html = include_str!("../assets/reader.html")
+        .replace("__READER_CSS__", include_str!("../assets/reader.css"))
         .replace("__STEM__", &stem)
         .replace("__HIGHLIGHT_SCRIPTS__", &highlight_scripts);
     std::fs::write(&preview.0, html).map_err(|e| e.to_string())?;

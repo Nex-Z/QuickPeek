@@ -1,0 +1,2878 @@
+{
+  "document": [
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 0,
+      "bytes": 9999990,
+      "readyMs": 1094,
+      "prepMs": 133,
+      "paintMs": 1063,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 0,
+      "bytes": 9999990,
+      "readyMs": 1099,
+      "prepMs": 191,
+      "paintMs": 1051,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 0,
+      "bytes": 10891100,
+      "readyMs": 1098,
+      "prepMs": 461,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 0,
+      "bytes": 10891100,
+      "readyMs": 1043,
+      "prepMs": 484,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 0,
+      "bytes": 32764830,
+      "readyMs": 1247,
+      "prepMs": 1113,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 0,
+      "bytes": 32764830,
+      "readyMs": 1047,
+      "prepMs": 953,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 1,
+      "bytes": 9999990,
+      "readyMs": 998,
+      "prepMs": 130,
+      "paintMs": null,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 1,
+      "bytes": 9999990,
+      "readyMs": 1125,
+      "prepMs": 162,
+      "paintMs": 1061,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 1,
+      "bytes": 10891100,
+      "readyMs": 999,
+      "prepMs": 426,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 1,
+      "bytes": 10891100,
+      "readyMs": 1037,
+      "prepMs": 451,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 1,
+      "bytes": 32764830,
+      "readyMs": 1086,
+      "prepMs": 951,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 1,
+      "bytes": 32764830,
+      "readyMs": 1155,
+      "prepMs": 1061,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 2,
+      "bytes": 9999990,
+      "readyMs": 1068,
+      "prepMs": 133,
+      "paintMs": 1005,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 2,
+      "bytes": 9999990,
+      "readyMs": 1035,
+      "prepMs": 188,
+      "paintMs": null,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 2,
+      "bytes": 10891100,
+      "readyMs": 979,
+      "prepMs": 388,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 2,
+      "bytes": 10891100,
+      "readyMs": 995,
+      "prepMs": 462,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 2,
+      "bytes": 32764830,
+      "readyMs": 1178,
+      "prepMs": 1043,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 2,
+      "bytes": 32764830,
+      "readyMs": 1059,
+      "prepMs": 974,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 3,
+      "bytes": 9999990,
+      "readyMs": 1036,
+      "prepMs": 129,
+      "paintMs": 1022,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 3,
+      "bytes": 9999990,
+      "readyMs": 1127,
+      "prepMs": 166,
+      "paintMs": 1077,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 3,
+      "bytes": 10891100,
+      "readyMs": 982,
+      "prepMs": 422,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 3,
+      "bytes": 10891100,
+      "readyMs": 1033,
+      "prepMs": 477,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 3,
+      "bytes": 32764830,
+      "readyMs": 1062,
+      "prepMs": 931,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 3,
+      "bytes": 32764830,
+      "readyMs": 1251,
+      "prepMs": 1116,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 4,
+      "bytes": 9999990,
+      "readyMs": 1040,
+      "prepMs": 123,
+      "paintMs": 1026,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 4,
+      "bytes": 9999990,
+      "readyMs": 1055,
+      "prepMs": 167,
+      "paintMs": null,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 4,
+      "bytes": 10891100,
+      "readyMs": 965,
+      "prepMs": 363,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 4,
+      "bytes": 10891100,
+      "readyMs": 1093,
+      "prepMs": 543,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 4,
+      "bytes": 32764830,
+      "readyMs": 1195,
+      "prepMs": 1057,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 4,
+      "bytes": 32764830,
+      "readyMs": 1096,
+      "prepMs": 959,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 5,
+      "bytes": 9999990,
+      "readyMs": 1006,
+      "prepMs": 130,
+      "paintMs": 956,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 5,
+      "bytes": 9999990,
+      "readyMs": 1124,
+      "prepMs": 173,
+      "paintMs": 1060,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 5,
+      "bytes": 10891100,
+      "readyMs": 940,
+      "prepMs": 406,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 5,
+      "bytes": 10891100,
+      "readyMs": 1108,
+      "prepMs": 526,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 5,
+      "bytes": 32764830,
+      "readyMs": 1072,
+      "prepMs": 943,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 5,
+      "bytes": 32764830,
+      "readyMs": 1196,
+      "prepMs": 1100,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 6,
+      "bytes": 9999990,
+      "readyMs": 1085,
+      "prepMs": 122,
+      "paintMs": 1021,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 6,
+      "bytes": 9999990,
+      "readyMs": 1033,
+      "prepMs": 142,
+      "paintMs": 984,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 6,
+      "bytes": 10891100,
+      "readyMs": 1054,
+      "prepMs": 461,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 6,
+      "bytes": 10891100,
+      "readyMs": 994,
+      "prepMs": 432,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 6,
+      "bytes": 32764830,
+      "readyMs": 1304,
+      "prepMs": 1170,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 6,
+      "bytes": 32764830,
+      "readyMs": 1063,
+      "prepMs": 934,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 7,
+      "bytes": 9999990,
+      "readyMs": 1030,
+      "prepMs": 136,
+      "paintMs": null,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 7,
+      "bytes": 9999990,
+      "readyMs": 1180,
+      "prepMs": 176,
+      "paintMs": 1133,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 7,
+      "bytes": 10891100,
+      "readyMs": 961,
+      "prepMs": 416,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 7,
+      "bytes": 10891100,
+      "readyMs": 1083,
+      "prepMs": 510,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 7,
+      "bytes": 32764830,
+      "readyMs": 1107,
+      "prepMs": 975,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 7,
+      "bytes": 32764830,
+      "readyMs": 1178,
+      "prepMs": 1046,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 8,
+      "bytes": 9999990,
+      "readyMs": 1072,
+      "prepMs": 131,
+      "paintMs": 1025,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 8,
+      "bytes": 9999990,
+      "readyMs": 1102,
+      "prepMs": 187,
+      "paintMs": 1088,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 8,
+      "bytes": 10891100,
+      "readyMs": 962,
+      "prepMs": 375,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 8,
+      "bytes": 10891100,
+      "readyMs": 1021,
+      "prepMs": 495,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 8,
+      "bytes": 32764830,
+      "readyMs": 1208,
+      "prepMs": 1069,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 8,
+      "bytes": 32764830,
+      "readyMs": 1128,
+      "prepMs": 989,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 9,
+      "bytes": 9999990,
+      "readyMs": 1020,
+      "prepMs": 121,
+      "paintMs": 1006,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 9,
+      "bytes": 9999990,
+      "readyMs": 1099,
+      "prepMs": 141,
+      "paintMs": 1049,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 9,
+      "bytes": 10891100,
+      "readyMs": 984,
+      "prepMs": 418,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 9,
+      "bytes": 10891100,
+      "readyMs": 977,
+      "prepMs": 406,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.16",
+      "repeat": 9,
+      "bytes": 32764830,
+      "readyMs": 1134,
+      "prepMs": 997,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    },
+    {
+      "file": "150k.xlsx",
+      "version": "0.1.15",
+      "repeat": 9,
+      "bytes": 32764830,
+      "readyMs": 1235,
+      "prepMs": 1102,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 150000
+    }
+  ],
+  "explorer": {
+    "0.1.15": [
+      {
+        "round": "1",
+        "name": "amber.png",
+        "window_ms": "134",
+        "body_ms": "199",
+        "closed": "True"
+      },
+      {
+        "round": "2",
+        "name": "text.txt",
+        "window_ms": "83",
+        "body_ms": "137",
+        "closed": "True"
+      },
+      {
+        "round": "3",
+        "name": "green.png",
+        "window_ms": "62",
+        "body_ms": "155",
+        "closed": "True"
+      },
+      {
+        "round": "4",
+        "name": "code.ps1",
+        "window_ms": "55",
+        "body_ms": "55",
+        "closed": "True"
+      },
+      {
+        "round": "5",
+        "name": "amber.png",
+        "window_ms": "37",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "6",
+        "name": "text.txt",
+        "window_ms": "45",
+        "body_ms": "121",
+        "closed": "True"
+      },
+      {
+        "round": "7",
+        "name": "green.png",
+        "window_ms": "59",
+        "body_ms": "154",
+        "closed": "True"
+      },
+      {
+        "round": "8",
+        "name": "code.ps1",
+        "window_ms": "64",
+        "body_ms": "64",
+        "closed": "True"
+      },
+      {
+        "round": "9",
+        "name": "amber.png",
+        "window_ms": "58",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "10",
+        "name": "text.txt",
+        "window_ms": "76",
+        "body_ms": "145",
+        "closed": "True"
+      },
+      {
+        "round": "11",
+        "name": "green.png",
+        "window_ms": "66",
+        "body_ms": "154",
+        "closed": "True"
+      },
+      {
+        "round": "12",
+        "name": "code.ps1",
+        "window_ms": "51",
+        "body_ms": "51",
+        "closed": "True"
+      },
+      {
+        "round": "13",
+        "name": "amber.png",
+        "window_ms": "50",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "14",
+        "name": "text.txt",
+        "window_ms": "62",
+        "body_ms": "156",
+        "closed": "True"
+      },
+      {
+        "round": "15",
+        "name": "green.png",
+        "window_ms": "86",
+        "body_ms": "179",
+        "closed": "True"
+      },
+      {
+        "round": "16",
+        "name": "code.ps1",
+        "window_ms": "58",
+        "body_ms": "58",
+        "closed": "True"
+      },
+      {
+        "round": "17",
+        "name": "amber.png",
+        "window_ms": "50",
+        "body_ms": "169",
+        "closed": "True"
+      },
+      {
+        "round": "18",
+        "name": "text.txt",
+        "window_ms": "67",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "19",
+        "name": "green.png",
+        "window_ms": "65",
+        "body_ms": "154",
+        "closed": "True"
+      },
+      {
+        "round": "20",
+        "name": "code.ps1",
+        "window_ms": "45",
+        "body_ms": "45",
+        "closed": "True"
+      },
+      {
+        "round": "21",
+        "name": "amber.png",
+        "window_ms": "58",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "22",
+        "name": "text.txt",
+        "window_ms": "63",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "23",
+        "name": "green.png",
+        "window_ms": "66",
+        "body_ms": "170",
+        "closed": "True"
+      },
+      {
+        "round": "24",
+        "name": "code.ps1",
+        "window_ms": "50",
+        "body_ms": "50",
+        "closed": "True"
+      },
+      {
+        "round": "25",
+        "name": "amber.png",
+        "window_ms": "66",
+        "body_ms": "158",
+        "closed": "True"
+      },
+      {
+        "round": "26",
+        "name": "text.txt",
+        "window_ms": "59",
+        "body_ms": "147",
+        "closed": "True"
+      },
+      {
+        "round": "27",
+        "name": "green.png",
+        "window_ms": "61",
+        "body_ms": "163",
+        "closed": "True"
+      },
+      {
+        "round": "28",
+        "name": "code.ps1",
+        "window_ms": "56",
+        "body_ms": "56",
+        "closed": "True"
+      },
+      {
+        "round": "29",
+        "name": "amber.png",
+        "window_ms": "66",
+        "body_ms": "153",
+        "closed": "True"
+      },
+      {
+        "round": "30",
+        "name": "text.txt",
+        "window_ms": "59",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "31",
+        "name": "green.png",
+        "window_ms": "52",
+        "body_ms": "145",
+        "closed": "True"
+      },
+      {
+        "round": "32",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      },
+      {
+        "round": "33",
+        "name": "amber.png",
+        "window_ms": "64",
+        "body_ms": "166",
+        "closed": "True"
+      },
+      {
+        "round": "34",
+        "name": "text.txt",
+        "window_ms": "51",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "35",
+        "name": "green.png",
+        "window_ms": "52",
+        "body_ms": "147",
+        "closed": "True"
+      },
+      {
+        "round": "36",
+        "name": "code.ps1",
+        "window_ms": "68",
+        "body_ms": "68",
+        "closed": "True"
+      },
+      {
+        "round": "37",
+        "name": "amber.png",
+        "window_ms": "58",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "38",
+        "name": "text.txt",
+        "window_ms": "69",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "39",
+        "name": "green.png",
+        "window_ms": "52",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "40",
+        "name": "code.ps1",
+        "window_ms": "57",
+        "body_ms": "57",
+        "closed": "True"
+      },
+      {
+        "round": "41",
+        "name": "amber.png",
+        "window_ms": "53",
+        "body_ms": "151",
+        "closed": "True"
+      },
+      {
+        "round": "42",
+        "name": "text.txt",
+        "window_ms": "53",
+        "body_ms": "133",
+        "closed": "True"
+      },
+      {
+        "round": "43",
+        "name": "green.png",
+        "window_ms": "60",
+        "body_ms": "147",
+        "closed": "True"
+      },
+      {
+        "round": "44",
+        "name": "code.ps1",
+        "window_ms": "72",
+        "body_ms": "72",
+        "closed": "True"
+      },
+      {
+        "round": "45",
+        "name": "amber.png",
+        "window_ms": "65",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "46",
+        "name": "text.txt",
+        "window_ms": "60",
+        "body_ms": "153",
+        "closed": "True"
+      },
+      {
+        "round": "47",
+        "name": "green.png",
+        "window_ms": "70",
+        "body_ms": "156",
+        "closed": "True"
+      },
+      {
+        "round": "48",
+        "name": "code.ps1",
+        "window_ms": "67",
+        "body_ms": "67",
+        "closed": "True"
+      },
+      {
+        "round": "49",
+        "name": "amber.png",
+        "window_ms": "56",
+        "body_ms": "130",
+        "closed": "True"
+      },
+      {
+        "round": "50",
+        "name": "text.txt",
+        "window_ms": "62",
+        "body_ms": "168",
+        "closed": "True"
+      },
+      {
+        "round": "51",
+        "name": "green.png",
+        "window_ms": "46",
+        "body_ms": "140",
+        "closed": "True"
+      },
+      {
+        "round": "52",
+        "name": "code.ps1",
+        "window_ms": "60",
+        "body_ms": "60",
+        "closed": "True"
+      },
+      {
+        "round": "53",
+        "name": "amber.png",
+        "window_ms": "55",
+        "body_ms": "162",
+        "closed": "True"
+      },
+      {
+        "round": "54",
+        "name": "text.txt",
+        "window_ms": "62",
+        "body_ms": "125",
+        "closed": "True"
+      },
+      {
+        "round": "55",
+        "name": "green.png",
+        "window_ms": "62",
+        "body_ms": "137",
+        "closed": "True"
+      },
+      {
+        "round": "56",
+        "name": "code.ps1",
+        "window_ms": "69",
+        "body_ms": "69",
+        "closed": "True"
+      },
+      {
+        "round": "57",
+        "name": "amber.png",
+        "window_ms": "55",
+        "body_ms": "145",
+        "closed": "True"
+      },
+      {
+        "round": "58",
+        "name": "text.txt",
+        "window_ms": "55",
+        "body_ms": "149",
+        "closed": "True"
+      },
+      {
+        "round": "59",
+        "name": "green.png",
+        "window_ms": "52",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "60",
+        "name": "code.ps1",
+        "window_ms": "78",
+        "body_ms": "78",
+        "closed": "True"
+      },
+      {
+        "round": "61",
+        "name": "amber.png",
+        "window_ms": "49",
+        "body_ms": "155",
+        "closed": "True"
+      },
+      {
+        "round": "62",
+        "name": "text.txt",
+        "window_ms": "46",
+        "body_ms": "153",
+        "closed": "True"
+      },
+      {
+        "round": "63",
+        "name": "green.png",
+        "window_ms": "65",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "64",
+        "name": "code.ps1",
+        "window_ms": "54",
+        "body_ms": "54",
+        "closed": "True"
+      },
+      {
+        "round": "65",
+        "name": "amber.png",
+        "window_ms": "53",
+        "body_ms": "149",
+        "closed": "True"
+      },
+      {
+        "round": "66",
+        "name": "text.txt",
+        "window_ms": "55",
+        "body_ms": "132",
+        "closed": "True"
+      },
+      {
+        "round": "67",
+        "name": "green.png",
+        "window_ms": "54",
+        "body_ms": "149",
+        "closed": "True"
+      },
+      {
+        "round": "68",
+        "name": "code.ps1",
+        "window_ms": "71",
+        "body_ms": "71",
+        "closed": "True"
+      },
+      {
+        "round": "69",
+        "name": "amber.png",
+        "window_ms": "53",
+        "body_ms": "161",
+        "closed": "True"
+      },
+      {
+        "round": "70",
+        "name": "text.txt",
+        "window_ms": "51",
+        "body_ms": "138",
+        "closed": "True"
+      },
+      {
+        "round": "71",
+        "name": "green.png",
+        "window_ms": "64",
+        "body_ms": "151",
+        "closed": "True"
+      },
+      {
+        "round": "72",
+        "name": "code.ps1",
+        "window_ms": "66",
+        "body_ms": "66",
+        "closed": "True"
+      },
+      {
+        "round": "73",
+        "name": "amber.png",
+        "window_ms": "45",
+        "body_ms": "137",
+        "closed": "True"
+      },
+      {
+        "round": "74",
+        "name": "text.txt",
+        "window_ms": "58",
+        "body_ms": "157",
+        "closed": "True"
+      },
+      {
+        "round": "75",
+        "name": "green.png",
+        "window_ms": "46",
+        "body_ms": "165",
+        "closed": "True"
+      },
+      {
+        "round": "76",
+        "name": "code.ps1",
+        "window_ms": "66",
+        "body_ms": "66",
+        "closed": "True"
+      },
+      {
+        "round": "77",
+        "name": "amber.png",
+        "window_ms": "50",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "78",
+        "name": "text.txt",
+        "window_ms": "59",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "79",
+        "name": "green.png",
+        "window_ms": "62",
+        "body_ms": "151",
+        "closed": "True"
+      },
+      {
+        "round": "80",
+        "name": "code.ps1",
+        "window_ms": "45",
+        "body_ms": "45",
+        "closed": "True"
+      },
+      {
+        "round": "81",
+        "name": "amber.png",
+        "window_ms": "52",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "82",
+        "name": "text.txt",
+        "window_ms": "47",
+        "body_ms": "142",
+        "closed": "True"
+      },
+      {
+        "round": "83",
+        "name": "green.png",
+        "window_ms": "41",
+        "body_ms": "136",
+        "closed": "True"
+      },
+      {
+        "round": "84",
+        "name": "code.ps1",
+        "window_ms": "54",
+        "body_ms": "54",
+        "closed": "True"
+      },
+      {
+        "round": "85",
+        "name": "amber.png",
+        "window_ms": "61",
+        "body_ms": "157",
+        "closed": "True"
+      },
+      {
+        "round": "86",
+        "name": "text.txt",
+        "window_ms": "39",
+        "body_ms": "121",
+        "closed": "True"
+      },
+      {
+        "round": "87",
+        "name": "green.png",
+        "window_ms": "65",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "88",
+        "name": "code.ps1",
+        "window_ms": "48",
+        "body_ms": "48",
+        "closed": "True"
+      },
+      {
+        "round": "89",
+        "name": "amber.png",
+        "window_ms": "49",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "90",
+        "name": "text.txt",
+        "window_ms": "48",
+        "body_ms": "139",
+        "closed": "True"
+      },
+      {
+        "round": "91",
+        "name": "green.png",
+        "window_ms": "64",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "92",
+        "name": "code.ps1",
+        "window_ms": "54",
+        "body_ms": "54",
+        "closed": "True"
+      },
+      {
+        "round": "93",
+        "name": "amber.png",
+        "window_ms": "59",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "94",
+        "name": "text.txt",
+        "window_ms": "64",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "95",
+        "name": "green.png",
+        "window_ms": "57",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "96",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      },
+      {
+        "round": "97",
+        "name": "amber.png",
+        "window_ms": "55",
+        "body_ms": "142",
+        "closed": "True"
+      },
+      {
+        "round": "98",
+        "name": "text.txt",
+        "window_ms": "64",
+        "body_ms": "125",
+        "closed": "True"
+      },
+      {
+        "round": "99",
+        "name": "green.png",
+        "window_ms": "52",
+        "body_ms": "175",
+        "closed": "True"
+      },
+      {
+        "round": "100",
+        "name": "code.ps1",
+        "window_ms": "62",
+        "body_ms": "62",
+        "closed": "True"
+      }
+    ],
+    "0.1.16": [
+      {
+        "round": "1",
+        "name": "amber.png",
+        "window_ms": "99",
+        "body_ms": "198",
+        "closed": "True"
+      },
+      {
+        "round": "2",
+        "name": "text.txt",
+        "window_ms": "59",
+        "body_ms": "122",
+        "closed": "True"
+      },
+      {
+        "round": "3",
+        "name": "green.png",
+        "window_ms": "62",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "4",
+        "name": "code.ps1",
+        "window_ms": "62",
+        "body_ms": "62",
+        "closed": "True"
+      },
+      {
+        "round": "5",
+        "name": "amber.png",
+        "window_ms": "57",
+        "body_ms": "138",
+        "closed": "True"
+      },
+      {
+        "round": "6",
+        "name": "text.txt",
+        "window_ms": "60",
+        "body_ms": "133",
+        "closed": "True"
+      },
+      {
+        "round": "7",
+        "name": "green.png",
+        "window_ms": "47",
+        "body_ms": "141",
+        "closed": "True"
+      },
+      {
+        "round": "8",
+        "name": "code.ps1",
+        "window_ms": "55",
+        "body_ms": "55",
+        "closed": "True"
+      },
+      {
+        "round": "9",
+        "name": "amber.png",
+        "window_ms": "57",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "10",
+        "name": "text.txt",
+        "window_ms": "49",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "11",
+        "name": "green.png",
+        "window_ms": "47",
+        "body_ms": "141",
+        "closed": "True"
+      },
+      {
+        "round": "12",
+        "name": "code.ps1",
+        "window_ms": "52",
+        "body_ms": "52",
+        "closed": "True"
+      },
+      {
+        "round": "13",
+        "name": "amber.png",
+        "window_ms": "49",
+        "body_ms": "156",
+        "closed": "True"
+      },
+      {
+        "round": "14",
+        "name": "text.txt",
+        "window_ms": "61",
+        "body_ms": "140",
+        "closed": "True"
+      },
+      {
+        "round": "15",
+        "name": "green.png",
+        "window_ms": "101",
+        "body_ms": "174",
+        "closed": "True"
+      },
+      {
+        "round": "16",
+        "name": "code.ps1",
+        "window_ms": "61",
+        "body_ms": "61",
+        "closed": "True"
+      },
+      {
+        "round": "17",
+        "name": "amber.png",
+        "window_ms": "64",
+        "body_ms": "145",
+        "closed": "True"
+      },
+      {
+        "round": "18",
+        "name": "text.txt",
+        "window_ms": "46",
+        "body_ms": "127",
+        "closed": "True"
+      },
+      {
+        "round": "19",
+        "name": "green.png",
+        "window_ms": "54",
+        "body_ms": "156",
+        "closed": "True"
+      },
+      {
+        "round": "20",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      },
+      {
+        "round": "21",
+        "name": "amber.png",
+        "window_ms": "52",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "22",
+        "name": "text.txt",
+        "window_ms": "57",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "23",
+        "name": "green.png",
+        "window_ms": "58",
+        "body_ms": "151",
+        "closed": "True"
+      },
+      {
+        "round": "24",
+        "name": "code.ps1",
+        "window_ms": "62",
+        "body_ms": "62",
+        "closed": "True"
+      },
+      {
+        "round": "25",
+        "name": "amber.png",
+        "window_ms": "72",
+        "body_ms": "163",
+        "closed": "True"
+      },
+      {
+        "round": "26",
+        "name": "text.txt",
+        "window_ms": "76",
+        "body_ms": "163",
+        "closed": "True"
+      },
+      {
+        "round": "27",
+        "name": "green.png",
+        "window_ms": "57",
+        "body_ms": "149",
+        "closed": "True"
+      },
+      {
+        "round": "28",
+        "name": "code.ps1",
+        "window_ms": "54",
+        "body_ms": "54",
+        "closed": "True"
+      },
+      {
+        "round": "29",
+        "name": "amber.png",
+        "window_ms": "51",
+        "body_ms": "158",
+        "closed": "True"
+      },
+      {
+        "round": "30",
+        "name": "text.txt",
+        "window_ms": "58",
+        "body_ms": "119",
+        "closed": "True"
+      },
+      {
+        "round": "31",
+        "name": "green.png",
+        "window_ms": "66",
+        "body_ms": "160",
+        "closed": "True"
+      },
+      {
+        "round": "32",
+        "name": "code.ps1",
+        "window_ms": "64",
+        "body_ms": "64",
+        "closed": "True"
+      },
+      {
+        "round": "33",
+        "name": "amber.png",
+        "window_ms": "61",
+        "body_ms": "157",
+        "closed": "True"
+      },
+      {
+        "round": "34",
+        "name": "text.txt",
+        "window_ms": "65",
+        "body_ms": "127",
+        "closed": "True"
+      },
+      {
+        "round": "35",
+        "name": "green.png",
+        "window_ms": "44",
+        "body_ms": "138",
+        "closed": "True"
+      },
+      {
+        "round": "36",
+        "name": "code.ps1",
+        "window_ms": "47",
+        "body_ms": "47",
+        "closed": "True"
+      },
+      {
+        "round": "37",
+        "name": "amber.png",
+        "window_ms": "54",
+        "body_ms": "135",
+        "closed": "True"
+      },
+      {
+        "round": "38",
+        "name": "text.txt",
+        "window_ms": "50",
+        "body_ms": "115",
+        "closed": "True"
+      },
+      {
+        "round": "39",
+        "name": "green.png",
+        "window_ms": "64",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "40",
+        "name": "code.ps1",
+        "window_ms": "46",
+        "body_ms": "46",
+        "closed": "True"
+      },
+      {
+        "round": "41",
+        "name": "amber.png",
+        "window_ms": "43",
+        "body_ms": "138",
+        "closed": "True"
+      },
+      {
+        "round": "42",
+        "name": "text.txt",
+        "window_ms": "43",
+        "body_ms": "139",
+        "closed": "True"
+      },
+      {
+        "round": "43",
+        "name": "green.png",
+        "window_ms": "55",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "44",
+        "name": "code.ps1",
+        "window_ms": "67",
+        "body_ms": "67",
+        "closed": "True"
+      },
+      {
+        "round": "45",
+        "name": "amber.png",
+        "window_ms": "55",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "46",
+        "name": "text.txt",
+        "window_ms": "48",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "47",
+        "name": "green.png",
+        "window_ms": "55",
+        "body_ms": "149",
+        "closed": "True"
+      },
+      {
+        "round": "48",
+        "name": "code.ps1",
+        "window_ms": "46",
+        "body_ms": "46",
+        "closed": "True"
+      },
+      {
+        "round": "49",
+        "name": "amber.png",
+        "window_ms": "51",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "50",
+        "name": "text.txt",
+        "window_ms": "53",
+        "body_ms": "147",
+        "closed": "True"
+      },
+      {
+        "round": "51",
+        "name": "green.png",
+        "window_ms": "58",
+        "body_ms": "162",
+        "closed": "True"
+      },
+      {
+        "round": "52",
+        "name": "code.ps1",
+        "window_ms": "60",
+        "body_ms": "60",
+        "closed": "True"
+      },
+      {
+        "round": "53",
+        "name": "amber.png",
+        "window_ms": "64",
+        "body_ms": "152",
+        "closed": "True"
+      },
+      {
+        "round": "54",
+        "name": "text.txt",
+        "window_ms": "54",
+        "body_ms": "81",
+        "closed": "True"
+      },
+      {
+        "round": "55",
+        "name": "green.png",
+        "window_ms": "57",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "56",
+        "name": "code.ps1",
+        "window_ms": "58",
+        "body_ms": "58",
+        "closed": "True"
+      },
+      {
+        "round": "57",
+        "name": "amber.png",
+        "window_ms": "102",
+        "body_ms": "167",
+        "closed": "True"
+      },
+      {
+        "round": "58",
+        "name": "text.txt",
+        "window_ms": "53",
+        "body_ms": "118",
+        "closed": "True"
+      },
+      {
+        "round": "59",
+        "name": "green.png",
+        "window_ms": "58",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "60",
+        "name": "code.ps1",
+        "window_ms": "67",
+        "body_ms": "67",
+        "closed": "True"
+      },
+      {
+        "round": "61",
+        "name": "amber.png",
+        "window_ms": "61",
+        "body_ms": "169",
+        "closed": "True"
+      },
+      {
+        "round": "62",
+        "name": "text.txt",
+        "window_ms": "74",
+        "body_ms": "143",
+        "closed": "True"
+      },
+      {
+        "round": "63",
+        "name": "green.png",
+        "window_ms": "49",
+        "body_ms": "158",
+        "closed": "True"
+      },
+      {
+        "round": "64",
+        "name": "code.ps1",
+        "window_ms": "50",
+        "body_ms": "50",
+        "closed": "True"
+      },
+      {
+        "round": "65",
+        "name": "amber.png",
+        "window_ms": "50",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "66",
+        "name": "text.txt",
+        "window_ms": "54",
+        "body_ms": "120",
+        "closed": "True"
+      },
+      {
+        "round": "67",
+        "name": "green.png",
+        "window_ms": "51",
+        "body_ms": "147",
+        "closed": "True"
+      },
+      {
+        "round": "68",
+        "name": "code.ps1",
+        "window_ms": "61",
+        "body_ms": "61",
+        "closed": "True"
+      },
+      {
+        "round": "69",
+        "name": "amber.png",
+        "window_ms": "51",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "70",
+        "name": "text.txt",
+        "window_ms": "57",
+        "body_ms": "92",
+        "closed": "True"
+      },
+      {
+        "round": "71",
+        "name": "green.png",
+        "window_ms": "53",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "72",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      },
+      {
+        "round": "73",
+        "name": "amber.png",
+        "window_ms": "52",
+        "body_ms": "161",
+        "closed": "True"
+      },
+      {
+        "round": "74",
+        "name": "text.txt",
+        "window_ms": "51",
+        "body_ms": "133",
+        "closed": "True"
+      },
+      {
+        "round": "75",
+        "name": "green.png",
+        "window_ms": "45",
+        "body_ms": "141",
+        "closed": "True"
+      },
+      {
+        "round": "76",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      },
+      {
+        "round": "77",
+        "name": "amber.png",
+        "window_ms": "61",
+        "body_ms": "154",
+        "closed": "True"
+      },
+      {
+        "round": "78",
+        "name": "text.txt",
+        "window_ms": "45",
+        "body_ms": "127",
+        "closed": "True"
+      },
+      {
+        "round": "79",
+        "name": "green.png",
+        "window_ms": "48",
+        "body_ms": "155",
+        "closed": "True"
+      },
+      {
+        "round": "80",
+        "name": "code.ps1",
+        "window_ms": "60",
+        "body_ms": "60",
+        "closed": "True"
+      },
+      {
+        "round": "81",
+        "name": "amber.png",
+        "window_ms": "67",
+        "body_ms": "160",
+        "closed": "True"
+      },
+      {
+        "round": "82",
+        "name": "text.txt",
+        "window_ms": "55",
+        "body_ms": "140",
+        "closed": "True"
+      },
+      {
+        "round": "83",
+        "name": "green.png",
+        "window_ms": "56",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "84",
+        "name": "code.ps1",
+        "window_ms": "60",
+        "body_ms": "60",
+        "closed": "True"
+      },
+      {
+        "round": "85",
+        "name": "amber.png",
+        "window_ms": "49",
+        "body_ms": "156",
+        "closed": "True"
+      },
+      {
+        "round": "86",
+        "name": "text.txt",
+        "window_ms": "45",
+        "body_ms": "140",
+        "closed": "True"
+      },
+      {
+        "round": "87",
+        "name": "green.png",
+        "window_ms": "81",
+        "body_ms": "163",
+        "closed": "True"
+      },
+      {
+        "round": "88",
+        "name": "code.ps1",
+        "window_ms": "49",
+        "body_ms": "49",
+        "closed": "True"
+      },
+      {
+        "round": "89",
+        "name": "amber.png",
+        "window_ms": "51",
+        "body_ms": "157",
+        "closed": "True"
+      },
+      {
+        "round": "90",
+        "name": "text.txt",
+        "window_ms": "60",
+        "body_ms": "153",
+        "closed": "True"
+      },
+      {
+        "round": "91",
+        "name": "green.png",
+        "window_ms": "51",
+        "body_ms": "146",
+        "closed": "True"
+      },
+      {
+        "round": "92",
+        "name": "code.ps1",
+        "window_ms": "55",
+        "body_ms": "55",
+        "closed": "True"
+      },
+      {
+        "round": "93",
+        "name": "amber.png",
+        "window_ms": "54",
+        "body_ms": "160",
+        "closed": "True"
+      },
+      {
+        "round": "94",
+        "name": "text.txt",
+        "window_ms": "54",
+        "body_ms": "141",
+        "closed": "True"
+      },
+      {
+        "round": "95",
+        "name": "green.png",
+        "window_ms": "49",
+        "body_ms": "144",
+        "closed": "True"
+      },
+      {
+        "round": "96",
+        "name": "code.ps1",
+        "window_ms": "52",
+        "body_ms": "52",
+        "closed": "True"
+      },
+      {
+        "round": "97",
+        "name": "amber.png",
+        "window_ms": "70",
+        "body_ms": "150",
+        "closed": "True"
+      },
+      {
+        "round": "98",
+        "name": "text.txt",
+        "window_ms": "45",
+        "body_ms": "138",
+        "closed": "True"
+      },
+      {
+        "round": "99",
+        "name": "green.png",
+        "window_ms": "62",
+        "body_ms": "148",
+        "closed": "True"
+      },
+      {
+        "round": "100",
+        "name": "code.ps1",
+        "window_ms": "63",
+        "body_ms": "63",
+        "closed": "True"
+      }
+    ]
+  },
+  "document_existing_profile": [
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 0,
+      "bytes": 10891100,
+      "readyMs": 1104,
+      "prepMs": 462,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 0,
+      "bytes": 10891100,
+      "readyMs": 1123,
+      "prepMs": 439,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 0,
+      "bytes": 9999990,
+      "readyMs": 1170,
+      "prepMs": 143,
+      "paintMs": 1139,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 0,
+      "bytes": 9999990,
+      "readyMs": 1191,
+      "prepMs": 126,
+      "paintMs": 1126,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 1,
+      "bytes": 10891100,
+      "readyMs": 1138,
+      "prepMs": 498,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 1,
+      "bytes": 10891100,
+      "readyMs": 1087,
+      "prepMs": 463,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 1,
+      "bytes": 9999990,
+      "readyMs": 1201,
+      "prepMs": 177,
+      "paintMs": 1153,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 1,
+      "bytes": 9999990,
+      "readyMs": 1157,
+      "prepMs": 126,
+      "paintMs": 1109,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 2,
+      "bytes": 10891100,
+      "readyMs": 1154,
+      "prepMs": 523,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 2,
+      "bytes": 10891100,
+      "readyMs": 1089,
+      "prepMs": 432,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 2,
+      "bytes": 9999990,
+      "readyMs": 1162,
+      "prepMs": 115,
+      "paintMs": 1096,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 2,
+      "bytes": 9999990,
+      "readyMs": 1240,
+      "prepMs": 126,
+      "paintMs": 1175,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 3,
+      "bytes": 10891100,
+      "readyMs": 1187,
+      "prepMs": 445,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 3,
+      "bytes": 10891100,
+      "readyMs": 1106,
+      "prepMs": 431,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 3,
+      "bytes": 9999990,
+      "readyMs": 1206,
+      "prepMs": 114,
+      "paintMs": 1142,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 3,
+      "bytes": 9999990,
+      "readyMs": 1219,
+      "prepMs": 124,
+      "paintMs": 1153,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 4,
+      "bytes": 10891100,
+      "readyMs": 1174,
+      "prepMs": 458,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 4,
+      "bytes": 10891100,
+      "readyMs": 1108,
+      "prepMs": 367,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 4,
+      "bytes": 9999990,
+      "readyMs": 1144,
+      "prepMs": 113,
+      "paintMs": 1114,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 4,
+      "bytes": 9999990,
+      "readyMs": 1251,
+      "prepMs": 121,
+      "paintMs": 1188,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 5,
+      "bytes": 10891100,
+      "readyMs": 1237,
+      "prepMs": 427,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 5,
+      "bytes": 10891100,
+      "readyMs": 1099,
+      "prepMs": 431,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 5,
+      "bytes": 9999990,
+      "readyMs": 1147,
+      "prepMs": 114,
+      "paintMs": 1081,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 5,
+      "bytes": 9999990,
+      "readyMs": 1105,
+      "prepMs": 126,
+      "paintMs": 1071,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 6,
+      "bytes": 10891100,
+      "readyMs": 1039,
+      "prepMs": 406,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 6,
+      "bytes": 10891100,
+      "readyMs": 1123,
+      "prepMs": 391,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 6,
+      "bytes": 9999990,
+      "readyMs": 1155,
+      "prepMs": 116,
+      "paintMs": 1107,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 6,
+      "bytes": 9999990,
+      "readyMs": 1227,
+      "prepMs": 128,
+      "paintMs": 1164,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 7,
+      "bytes": 10891100,
+      "readyMs": 1162,
+      "prepMs": 406,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 7,
+      "bytes": 10891100,
+      "readyMs": 1071,
+      "prepMs": 410,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 7,
+      "bytes": 9999990,
+      "readyMs": 1190,
+      "prepMs": 130,
+      "paintMs": 1126,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 7,
+      "bytes": 9999990,
+      "readyMs": 1156,
+      "prepMs": 118,
+      "paintMs": 1126,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 8,
+      "bytes": 10891100,
+      "readyMs": 1125,
+      "prepMs": 435,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 8,
+      "bytes": 10891100,
+      "readyMs": 1101,
+      "prepMs": 382,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 8,
+      "bytes": 9999990,
+      "readyMs": 1273,
+      "prepMs": 138,
+      "paintMs": 1208,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 8,
+      "bytes": 9999990,
+      "readyMs": 1217,
+      "prepMs": 124,
+      "paintMs": 1152,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.16",
+      "repeat": 9,
+      "bytes": 10891100,
+      "readyMs": 1127,
+      "prepMs": 394,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "large.xlsx",
+      "version": "0.1.15",
+      "repeat": 9,
+      "bytes": 10891100,
+      "readyMs": 1189,
+      "prepMs": 425,
+      "paintMs": null,
+      "textLength": 0,
+      "notice": "",
+      "rows": 100,
+      "chunks": 0,
+      "status": "",
+      "total": 50000
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.15",
+      "repeat": 9,
+      "bytes": 9999990,
+      "readyMs": 1303,
+      "prepMs": 116,
+      "paintMs": 1239,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    },
+    {
+      "file": "10mb.html",
+      "version": "0.1.16",
+      "repeat": 9,
+      "bytes": 9999990,
+      "readyMs": 1154,
+      "prepMs": 121,
+      "paintMs": 1089,
+      "textLength": 9999990,
+      "notice": "",
+      "rows": 0,
+      "chunks": 0,
+      "status": ""
+    }
+  ],
+  "build": {
+    "base": "0.1.15",
+    "candidate": "0.1.16",
+    "candidate_exe_sha256": "665c1b703414689ddf0a998a10d0d779c7d6585dc9667206e29f16494ce721fd",
+    "release_lto": false
+  }
+}
