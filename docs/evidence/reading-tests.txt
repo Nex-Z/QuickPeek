@@ -1,0 +1,2 @@
+Long image: mouse-wheel scroll, Ctrl+wheel zoom in/out PASS
+PDF: real mouse-drag copy and Ctrl+wheel rendering change PASS; scroll screenshot saved for visual verification

@@ -1,0 +1,3 @@
+﻿Explorer Space / Right / Space / resident broker : PASS
+Explorer rename input is not intercepted : PASS
+Tray broker shutdown : PASS

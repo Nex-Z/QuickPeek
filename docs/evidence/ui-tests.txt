@@ -1,0 +1,8 @@
+readme.md : PASS
+example.txt : PASS
+example.rs : PASS
+example.json : PASS
+invalid.json : PASS
+prototype.png : PASS
+sample.pdf : PASS
+sample.mp4 : PASS

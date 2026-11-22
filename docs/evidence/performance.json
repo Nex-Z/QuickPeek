@@ -1,0 +1,135 @@
+[
+  {
+    "file": "5mb.log",
+    "bytes": 5069412,
+    "readyMs": 952,
+    "textLength": 5069412,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "69,445 行"
+  },
+  {
+    "file": "10mb.log",
+    "bytes": 10138824,
+    "readyMs": 914,
+    "textLength": 10138824,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "138,889 行"
+  },
+  {
+    "file": "5mb.js",
+    "bytes": 5069412,
+    "readyMs": 949,
+    "textLength": 5069412,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "69,445 行"
+  },
+  {
+    "file": "10mb.js",
+    "bytes": 10138824,
+    "readyMs": 910,
+    "textLength": 10138824,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "138,889 行"
+  },
+  {
+    "file": "5mb.json",
+    "bytes": 4999996,
+    "readyMs": 1016,
+    "textLength": 6846149,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "384,617 行"
+  },
+  {
+    "file": "10mb.json",
+    "bytes": 9999991,
+    "readyMs": 1017,
+    "textLength": 13692296,
+    "notice": "",
+    "rows": 0,
+    "chunks": 2,
+    "status": "769,232 行"
+  },
+  {
+    "file": "5mb.csv",
+    "bytes": 5070384,
+    "readyMs": 919,
+    "textLength": 5070384,
+    "notice": "",
+    "rows": 100,
+    "chunks": 0,
+    "status": "70,421 行 · 8 列",
+    "total": 70422
+  },
+  {
+    "file": "10mb.csv",
+    "bytes": 10140840,
+    "readyMs": 1217,
+    "textLength": 10140840,
+    "notice": "",
+    "rows": 100,
+    "chunks": 0,
+    "status": "140,844 行 · 8 列",
+    "total": 140845
+  },
+  {
+    "file": "large.xlsx",
+    "bytes": 10891100,
+    "readyMs": 942,
+    "textLength": 0,
+    "notice": "",
+    "rows": 100,
+    "chunks": 0,
+    "status": "50,000 行 · 10 列",
+    "total": 50000
+  },
+  {
+    "file": "5mb.md",
+    "bytes": 4999977,
+    "readyMs": 922,
+    "textLength": 4999977,
+    "notice": "",
+    "rows": 0,
+    "chunks": 0,
+    "status": "Markdown 预览"
+  },
+  {
+    "file": "10mb.md",
+    "bytes": 9999954,
+    "readyMs": 976,
+    "textLength": 9999954,
+    "notice": "",
+    "rows": 0,
+    "chunks": 0,
+    "status": "Markdown 预览"
+  },
+  {
+    "file": "5mb.html",
+    "bytes": 4999995,
+    "readyMs": 996,
+    "textLength": 4999995,
+    "notice": "",
+    "rows": 0,
+    "chunks": 0,
+    "status": "HTML 预览"
+  },
+  {
+    "file": "10mb.html",
+    "bytes": 9999990,
+    "readyMs": 1033,
+    "textLength": 9999990,
+    "notice": "",
+    "rows": 0,
+    "chunks": 0,
+    "status": "HTML 预览"
+  }
+]

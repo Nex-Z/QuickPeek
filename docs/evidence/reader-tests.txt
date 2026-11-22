@@ -1,0 +1,7 @@
+log: PASS; fresh-process first reader ready 839 ms
+markdown: PASS; fresh-process first reader ready 928 ms
+json: PASS; fresh-process first reader ready 853 ms
+excel: PASS; fresh-process first reader ready 938 ms
+csv: PASS; fresh-process first reader ready 874 ms
+html: PASS; fresh-process first reader ready 938 ms
+code: PASS; fresh-process first reader ready 826 ms

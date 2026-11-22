@@ -1,0 +1,5 @@
+ChatGPT Image 2026年9月22日 15_32_00.png: PASS
+PixPin_2026-09-14_23-10-19.webp: PASS
+playlist-file.wav: PASS
+sample.mp4: PASS
+Explorer Space twice with existing preview + foreground without topmost: PASS

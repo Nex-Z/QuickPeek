@@ -1,0 +1,6 @@
+QuickPeek 文本预览
+
+UTF-8 中文、English、emoji 👀。
+Quick Peek keeps a space in this sentence.
+
+原文件只读；可以搜索并使用窗口底部提示切换文件。

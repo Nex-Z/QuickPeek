@@ -1,0 +1,21 @@
+Subject: =?utf-8?b?6YKu5Lu25qC35L6L?=
+From: Sender <alice@example.com>
+To: bob@example.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============8278068001752738212=="
+
+--===============8278068001752738212==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+邮件正文
+
+--===============8278068001752738212==
+Content-Type: application/octet-stream
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename*=utf-8''%E9%99%84%E4%BB%B6.txt
+MIME-Version: 1.0
+
+YWJj
+
+--===============8278068001752738212==--
